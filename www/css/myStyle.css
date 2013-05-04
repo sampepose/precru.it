@@ -18,3 +18,11 @@ body {
   margin-left: -15px;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
+
+.fr {
+    float:right;
+}
+
+h4.personName {
+    margin-bottom: 2px;
+}
