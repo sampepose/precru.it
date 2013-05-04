@@ -9,7 +9,22 @@
 		<link rel="stylesheet" href="css/myStyle.css">
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
-	</head>
+
+	<script type="text/javascript" src="http://platform.linkedin.com/in.js">
+  api_key: YOUR_API_KEY_GOES_HERE
+  authorize: true
+</script>
+ 
+<script type="text/javascript">
+function onLinkedInAuth() {
+  IN.API.Profile("me")
+    .result( function(me) {
+      var id = me.values[0].id;
+      // AJAX call to pass back id to your server
+    });
+}
+</script>
+		</head>
 	<body>
 	
 	<!--create the navbar for a non-logged in user-->
@@ -48,6 +63,7 @@
 					<h4>Description</h4>
 					<p>Hello, Pilar? My name is Walter Sobchak, we spoke on the phone, this is my associate Jeffrey Lebowski. Euismod ac maecenas vitae eros. Blow on them. Velit, eu suscipit erat integer purus lacus, pretium. If the plan gets too complex something always goes wrong. If there's one thing I learned in Nam—. Vel venenatis eu, volutpat non erat donec a metus ac eros dictum. Sir, this is a mortuary, not a rental house. Aliquet nulla consectetur egestas placerat maecenas pulvinar nisl et nisl.</p>
 					<a href="#" class="btn btn-primary">Register Now</a>
+					<script type="IN/Login" data-onAuth="onLinkedInAuth"></script>
 				</div>
 			</div>
 		</div>

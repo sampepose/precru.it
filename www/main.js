@@ -7,7 +7,8 @@ angular.module("app", [])
             .when("/", {redirectTo: "/dash"})
             .when("/index.html", {redirectTo: "/dash"})
             .when("/dash", {templateUrl: "tmplts/dash.tmplt.html", controller: "DashCtrl"})
-            .when("/confirmRegistration", {templateUrl: "tmplts/confirmRegistration.tmplt.html"});
+            .when("/confirmRegistration", {templateUrl: "tmplts/confirmRegistration.tmplt.html"})
+            .when("/addLeads", {templateUrl: "tmplts/addLeads.tmplt.html"});
     }])
     .controller("DashCtrl", ["$scope", function ($scope) {
         $scope.people =
