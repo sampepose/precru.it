@@ -1,18 +1,15 @@
 <div class="container well">
     <i class="icon-remove fr"></i>
     <div class="row-fluid">
-        <div class="span2">
-            <img ng-src="{{person.imageUrl}}"/>
+        <div class="span1">
+            <img class="linkedInImage" ng-src="{{person.imageUrl}}"/>
         </div>
-        <div class="span10">
+        <div class="span11">
             <h4 class="personName"><a href="#" ng-bind="person.name"></a></h4>
             <span ng-bind="person.headline"></span>
             <!--LinkedIn profile picture-->
             <p>Updated information on the target will go here!</p>
 
-            <div class="row-fluid">
-                <div class="span12"></br></div>
-            </div>
             <ul class="nav nav-list">
                 <li class="divider"></li>
                 <li class="nav-header">Updated <span ng-bind="person.timestamp"></span> ago</li>
