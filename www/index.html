@@ -12,31 +12,9 @@
 </head>
 <body>
 
+<ng-include src="'tmplts/topnav.tmplt.html'"></ng-include>
+
 <div ng-view></div>
-
-<!--create the navbar-->
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-th-list"></span>
-            </a>
-            <a class="brand">Network Activity Stream</a>
-
-            <div class="nav-collapse collapse">
-                <ul class="nav pull-right">
-                    <li class="dropdown"><a>Welcome, Dude</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Logout</a></li>
-                        </ul>
-                    <li>
-                    <li class="active"><a href="index.html"><i class="icon-home"></i> Stream</a></li>
-                    <li class="dropdown"><a href="#"><i class="icon-cog"></i> Manage</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
