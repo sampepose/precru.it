@@ -6,7 +6,8 @@ angular.module("app", [])
         $routeProvider
             .when("/", {redirectTo: "/dash"})
             .when("/index.html", {redirectTo: "/dash"})
-            .when("/dash", {templateUrl: "tmplts/dash.tmplt.html", controller: "DashCtrl"});
+            .when("/dash", {templateUrl: "tmplts/dash.tmplt.html", controller: "DashCtrl"})
+            .when("/confirmRegistration", {templateUrl: "tmplts/confirmRegistration.tmplt.html"});
     }])
     .controller("DashCtrl", ["$scope", function ($scope) {
         $scope.people =
