@@ -1,19 +1,16 @@
-<div class="container well">
-    <div ng-click="removePerson()"><i class="icon-remove fr"></i></div>
+<div class="container well streamItem">
     <div class="row-fluid">
-        <div class="span1">
-            <img class="linkedInImage" ng-src="{{person.imageUrl}}"/>
+        <div class="span2">
+            <img class="profileImage" ng-src="{{person.imageUrl}}"/>
         </div>
-        <div class="span11">
-            <h4 class="personName"><a href="#" ng-bind="person.name"></a></h4>
-            <span ng-bind="person.headline"></span>
-            <!--LinkedIn profile picture-->
-            <p>Updated information on the target will go here!</p>
-
-            <ul class="nav nav-list">
-                <li class="divider"></li>
-                <li class="nav-header">Updated <span ng-bind="person.timestamp"></span> ago</li>
-            </ul>
+        <div class="span10">
+            <h3 class="personName di"><a href="#" ng-bind="person.name"></a>,</h3>
+            <span class="personHeadline" ng-bind="person.headline"></span>
+            <div class="di" ng-click="removePerson()"><i class="icon-remove fr"></i></div>
+            <span ng-bind="person.email"></span>
+            <br>
+            <strong class="fl" ng-bind="person.event"></strong>
+            <span class="fr" ng-bind="person.timestamp"></span>
         </div>
     </div>
 </div>
