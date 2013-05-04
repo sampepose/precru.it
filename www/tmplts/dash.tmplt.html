@@ -1,5 +1,5 @@
 <div class="row-fluid personContainer" ng-repeat="person in people" ng-animate="{enter: 'example-repeat-enter',
                         leave: 'example-repeat-leave',
                         move: 'example-repeat-move'}" >
-    <div stream-item></div>
+    <div stream-item data-person="person" data-people="people"></div>
 </div>

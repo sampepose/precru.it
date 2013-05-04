@@ -41,15 +41,19 @@ angular.module("app", [])
                 }
             );
         };
-
-        $scope.pop = function () {
-            $scope.people.pop();
-        }
     }])
     .directive("streamItem", function() {
         return {
             restrict: "A",
             templateUrl: "tmplts/streamItem.tmplt.html",
-            controller: "DashCtrl"
+            scope : {
+                people: "=",
+                person: "="
+            },
+            controller: function($scope) {
+                $scope.removePerson = function() {
+                    $scope.people.splice($scope.people.indexOf($scope.person), 1);
+                };
+            }
         }
     });
