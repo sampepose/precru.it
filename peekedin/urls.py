@@ -6,5 +6,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Admin URL
-    url(r'^/_foo/admin/', include(admin.site.urls)),
+    url(r'^_foo/admin/', include(admin.site.urls)),
+
+    # Dashboard
+    url(r'^$', include('dashboard.urls')),
 )

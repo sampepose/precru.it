@@ -24,7 +24,7 @@ DATABASES = {
 }
 
 # DB provided by Heroku <3
-DATABASES['default'] = dj_database_url.config()
+DATABASES['default'] = dj_database_url.config(default='postgres://localhost:5432/peekedin')
 
 # From Heroku getting started guide. Not sure? Sounds important.
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
@@ -130,6 +130,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'south',
+    'social_auth',
+    'dashboard',
 )
 
 # A sample logging configuration. The only tangible logging
