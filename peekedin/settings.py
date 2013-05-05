@@ -30,7 +30,7 @@ DATABASES = {
 
 # DB provided by Heroku <3
 # DATABASES['default'] = dj_database_url.config(default='postgres://peekedin:password@localhost:5432/peekedin')
-# DATABASES['default'] =  dj_database_url.config(™)
+# DATABASES['default'] =  dj_database_url.config()
 
 # From Heroku getting started guide. Not sure? Sounds important.
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
