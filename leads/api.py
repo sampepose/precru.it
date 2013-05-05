@@ -17,7 +17,7 @@ from .serializers import LeadSerializer
 class LeadListView(generics.ListCreateAPIView):
     '''
     Listing and creating leads
-    ''' 
+    '''
     parser_classes = (parsers.JSONParser,)
     serializer_class = LeadSerializer
     model = Lead
