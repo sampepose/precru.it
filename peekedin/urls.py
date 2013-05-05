@@ -1,11 +1,37 @@
 import settings
 from django.conf.urls import patterns, include, url
 
+from rest_framework.decorators import api_view
+from rest_framework.urlpatterns import format_suffix_patterns
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
+
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
 
+##
+# API Index
+##
+
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'core':  {
+            'ping': reverse('ping-view', request=request, format=format),
+            'register': reverse('register-view', request=request, format=format),
+            'login': reverse('login-view', request=request, format=format),
+            'logout': reverse('logout-view', request=request, format=format),
+        },
+        'leads': reverse('lead-list-view', request=request, format=format),
+    })
+
 urlpatterns = patterns('',
+    # API stuff
+    (r'^api/$', api_root),
+    url(r'^api/core/', include('core.urls')),
+    url(r'^api/leads/', include('leads.urls')),
+    
     # Admin URL
     url(r'^_foo/admin/', include(admin.site.urls)),
 
@@ -13,10 +39,15 @@ urlpatterns = patterns('',
     url(r'', include('dashboard.urls')),
 )
 
-# Remove this comment and indent the following few lines
-# when we're in production. This is to get Heroku to
-# serve up static files properly.
-if not settings.DEBUG:
-    urlpatterns += patterns('',
-        (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
-    )
+#urlpatterns += patterns('',
+#    (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+#)
+
+# Format suffixes
+urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json', 'api'])
+
+# Default login/logout views
+urlpatterns += patterns('',
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+)
+
