@@ -8,7 +8,7 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
             .when("/home", {templateUrl: "/static/tmplts/home.tmplt.html"})
             .when("/dash", {templateUrl: "/static/tmplts/dash.tmplt.html", controller: "DashCtrl"})
             .when("/myAccount", {templateUrl: "/static/tmplts/myAccount.tmplt.html"})
-			.when("/addLeads", {templateUrl: "/static/tmplts/addLeads.tmplt.html"});
+			.when("/addLead", {templateUrl: "/static/tmplts/addLeads.tmplt.html", controller:"AddLeadsCtrl"});
     }])
     .controller("HeaderCtrl", ["$scope", "$http", "$location", "authService", "pingService",
         function ($scope, $http, $location, authService, pingService) {
@@ -39,29 +39,52 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
             })
         }])
     .controller("DashCtrl", ["$scope", "$http", function ($scope, $http) {
-        $scope.people = [];
+        $scope.leads = [];
 
         $http.get("/api/leads/")
             .success(function (data) {
                 console.log(data);
-                $scope.people = data;
+                $scope.leads = data;
             })
             .error(function (data, status) {
                 //TODO: Error handling...
             });
     }])
-    .directive("streamItem", function() {
+    .controller("AddLeadsCtrl", ["$scope", "$http", function ($scope, $http) {
+        $scope.lead = {
+            url : ""
+        };
+
+        $scope.addLead = function () {
+            $http.post("/api/leads/")//TODO: POST OR GET?
+                .success(function (data) {
+                    //TODO: Show success
+                    $scope.lead.url = "";
+                })
+                .error(function (data, status) {
+                    //TODO: Error handling...
+                });
+        };
+
+    }])
+    .directive("streamItem", function($http) {
         return {
             restrict: "A",
             templateUrl: "/static/tmplts/streamItem.tmplt.html",
             scope : {
-                people: "=",
-                person: "="
+                leads: "=",
+                lead: "="
             },
             controller: function($scope) {
                 $scope.areEventsCollapsed = true;
-                $scope.removePerson = function() {
-                    $scope.people.splice($scope.people.indexOf($scope.person), 1);
+                $scope.removeLead = function() {
+                    $http.delete("/api/leads/" + $scope.lead.id)
+                        .success(function (data) {
+                            $scope.leads.splice($scope.leads.indexOf($scope.lead), 1);
+                        })
+                        .error(function (data, status) {
+                            //TODO: Error handling...
+                        });
                 };
             }
         }
@@ -104,7 +127,7 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
             templateUrl: "/static/tmplts/loginModal.tmplt.html"
         }
     })
-    .controller("LoginModalCtrl", function($scope, $http, $location) {
+    .controller("LoginModalCtrl", function($scope, $http, $location, authService) {
         $scope.auth = {
             username: "",
             password: ""
@@ -121,6 +144,7 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
         $scope.login = function () {
             $http.post("/api/login/", {username: $scope.auth.username, password: $scope.auth.password})
                 .success(function (data) {
+                    authService.username = data.username;
                     $location.path("/dash");
                 })
                 .error(function (data, status) {
