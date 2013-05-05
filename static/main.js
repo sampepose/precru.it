@@ -22,38 +22,15 @@ angular.module("app", ["services", "ui.route"])
         $scope.people =
             [
                 {
-                    name: "Jesse Gray",
-                    email: "jesse@gmail.com",
-                    url: "http://www.linkedin.com/in/jessegray/",
-                    imageUrl: "http://www.atmnhs.host22.com/Pictures/silhouette-woman.png",
-                    headline: "UX Guru",
-                    event: "Changed job position",
-                    timestamp: moment().subtract('m', Math.random()*10).fromNow()
-                },
-                {
-                    name: "Sam Pepose",
-                    email: "sam@gmail.com",
-                    url: "http://www.linkedin.com/pub/samuel-pepose/56/816/59b",
-                    imageUrl: "http://www.atmnhs.host22.com/Pictures/silhouette-woman.png",
-                    headline: "Developer",
+                    name: "Hana Drake",
+                    email: "hana.drake@gmail.com",
+                    url: "http://www.linkedin.com",
+                    imageUrl: "",
+                    headline: "Chief Executive Officer",
                     event: "Updated Recommendations",
                     timestamp: moment().subtract('m', Math.random()*10).fromNow()
                 }
             ];
-
-        $scope.add = function() {
-            $scope.people.push(
-                {
-                    name: "John Doe",
-                    email: "blah@gmail.com",
-                    url: "",
-                    imageUrl: "http://www.atmnhs.host22.com/Pictures/silhouette-woman.png",
-                    headline: "Developer",
-                    event: "Updated ____",
-                    timestamp: moment().subtract('m', Math.random()*10).fromNow()
-                }
-            );
-        };
     }])
     .directive("streamItem", function() {
         return {

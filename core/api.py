@@ -38,9 +38,6 @@ class PingView(generics.SingleObjectAPIView):
     Ping. Pong.
     '''
     def get(self, request, *args, **kwargs):
-        if not request.user.is_authenticated():
-            raise rest_exceptions.PermissionDenied()
-
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
 
