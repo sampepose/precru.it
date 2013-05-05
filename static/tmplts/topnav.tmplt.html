@@ -5,7 +5,7 @@
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-th-list"></span>
             </a>
-            <a class="brand" href="#/home"><img src="../../static/img/precruit-nav.png" height="40" alt="Precru.it" /></a>
+            <a class="brand" href="#/home"><img src="/img/precruit-nav.png" height="40" alt="Precru.it" /></a>
             <div class="nav-collapse collapse">
                 <ul class="nav pull-left">
                     <li><a href="#/dash" ui-route="/home" ng-hide="$uiRoute"><i class="icon-user" ></i> Stream</a></li>
@@ -18,7 +18,7 @@
 					<!-- end -->
 					<!-- if not logged in -->
 					<!-- Button to trigger modal -->
-					<a href="#myModal" role="button" class="btn" data-toggle="modal">Register</a>
+					<a href="#registerModal" role="button" class="btn" data-toggle="modal">Register</a>
 					<!-- end -->
                 </ul>
             </div>
@@ -27,8 +27,8 @@
 </div>
 
 
-<!-- Modal -->
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- Register Modal -->
+<div id="registerModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">Register for Precru.it</h3>
@@ -53,9 +53,32 @@
 				</tr>
 			</table>
 		</div>
-	  <div class="modal-footer">
-		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-		<button class="btn btn-primary">Register and Pay</button>
-	  </div>
-	 </form>
+		<div class="modal-footer">
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+			<a href="#payModal" role="button"class="btn btn-primary" data-toggle="modal"  data-dismiss="modal" aria-hidden="true">Register</a>
+		</div>
+	</form>
+</div>
+
+<!-- Pay Modal -->
+<div id="payModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-body">
+			<h3>Thanks for Registering, [name]</h3>
+			<p> Precru.it services are $99.00 per month, please use a payment option below.</p>
+		</div>
+		<div class="modal-footer">
+			<!-- Stripe -->
+			<form action="" method="POST">
+				<div class="modal-body">
+				  <script
+					src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"
+					data-key="pk_test_E79QPnCW1icddzdNWRdBnXsZ"
+					data-amount="9900"
+					data-name="Precru.it"
+					data-description="$99 per month"
+					data-image="/128x128.png">
+				  </script>
+				</div>
+			</form>
+		</div>
 </div>
