@@ -5,11 +5,11 @@ import os
 
 BASE_DIR = os.path.basename(os.path.abspath(__file__))
 
-DEBUG = bool(os.environ.get('DJANGO_DEBUG', ''))
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Abe', 'abe.music@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -151,18 +151,45 @@ LOGGING = {
             '()': 'django.utils.log.RequireDebugFalse'
         }
     },
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s %(name)s [%(levelname)s]:%(message)s',
+        }
+    },
     'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'django.utils.log.NullHandler'
+        },
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+        'console': {
+            'level': 'DEBUG',
+            'formatter': 'standard',
+            'class': 'logging.StreamHandler',
+        },
     },
     'loggers': {
         'django.request': {
-            'handlers': ['mail_admins'],
+            #'handlers': ['mail_admins'],
+            'handlers': ['console'],
             'level': 'ERROR',
             'propagate': True,
+        },
+        'peekedin': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+        'dashboard': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+        'peekedin.dashboard': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
         },
     }
 }

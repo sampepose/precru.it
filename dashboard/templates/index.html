@@ -3,6 +3,24 @@
 <title>FOOO</title>
 </head>
 <body>
-Hello world.
+
+{%if messages %}
+<div>
+    <ul>
+        {% for message in messages %}
+        <li{%if message.tags%} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+{% if user.is_authenticated %}
+<p>
+    Welcome back {{ user }} : <a href="{% url 'logout-view' %}">logout</a>
+</p>
+{% endif %}
+
+<p><a href="{% url 'login-view' %}">login</a></p>
+
 </body>
 </html>
