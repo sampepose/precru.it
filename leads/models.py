@@ -6,23 +6,23 @@ class Lead(models.Model):
     owner = models.ForeignKey(User, related_name='leads')
 
     # name of the lead
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=64, blank=True)
 
     # headline of the lead
-    name = models.CharField(max_length=64)
+    headline = models.CharField(max_length=64, blank=True)
 
     # email of the lead
-    email = models.EmailField()
+    email = models.EmailField(blank=True)
 
-    # LinkedIn profile URL
-    url = models.URLField()
+    # LinkedIn profile URL - unique!
+    url = models.URLField(unique=True)
 
     # LinkedIn image URL
-    image_url = models.URLField()
+    image_url = models.URLField(blank=True)
 
 class LeadEvent(models.Model):
     # Lead this event belongs to
-    lead = models.ForeignKey(Lead)
+    lead = models.ForeignKey(Lead, related_name='events')
 
     # Event type (field that changed)
     event_type = models.CharField(max_length=64)

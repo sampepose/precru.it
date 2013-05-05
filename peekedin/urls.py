@@ -1,7 +1,8 @@
 import settings
 from django.conf.urls import patterns, include, url
 
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, authentication_classes
+from rest_framework.authentication import SessionAuthentication
 from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
@@ -15,6 +16,7 @@ admin.autodiscover()
 ##
 
 @api_view(['GET'])
+@authentication_classes((SessionAuthentication,))
 def api_root(request, format=None):
     return Response({
         'core':  {
@@ -29,7 +31,7 @@ def api_root(request, format=None):
 urlpatterns = patterns('',
     # API stuff
     (r'^api/$', api_root),
-    url(r'^api/core/', include('core.urls')),
+    url(r'^api/', include('core.urls')),
     url(r'^api/leads/', include('leads.urls')),
     
     # Admin URL
