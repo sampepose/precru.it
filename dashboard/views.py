@@ -27,6 +27,6 @@ class LoginView(TemplateView):
             return redirect('landing-page')
         
 class LogoutView(View):
-    def post(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         auth.logout(request)
         return redirect('landing-page')
