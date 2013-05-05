@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework import generics, parsers, authentication
 from rest_framework import exceptions as rest_exceptions
 
-from core import util
+from core import utils
 
 from .models import Lead, LeadEvent
 from .serializers import LeadSerializer
@@ -29,7 +29,7 @@ class LeadListView(generics.ListCreateAPIView):
 
     def post_save(self, obj, created=False):
 
-        if util.is_authed(self.request.user, 'list_leads'):
+        if utils.is_authed(self.request.user, 'list_leads'):
             pass
 
         if created:
