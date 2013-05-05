@@ -1,0 +1,25 @@
+<div modal="shouldBeOpen" options="opts">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="exit()" aria-hidden="true">×</button>
+        <h3>Login to Precru.it</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label" for="inputEmail">Username</label>
+                <div class="controls">
+                    <input type="text" id="inputEmail" placeholder="Username" ng-model="auth.username">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="inputPassword">Password</label>
+                <div class="controls">
+                    <input type="password" id="inputPassword" placeholder="Password" ng-model="auth.password">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a href="" ng-click="login()" role="button"class="btn btn-primary" data-toggle="modal"  data-dismiss="modal" aria-hidden="true">Login</a>
+    </div>
+</div>

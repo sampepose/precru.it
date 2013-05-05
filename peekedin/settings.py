@@ -116,6 +116,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'peekedin.middleware.disable_csrf',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -154,10 +155,10 @@ LINKEDIN_SECRET = '5586ae55-478c-4b38-851d-0f53b10110c1'
 
 # Django Rest Framework configuration
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        #'core.authentication.BaseAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-    ),
+    #'DEFAULT_AUTHENTICATION_CLASSES': (
+    #    #'core.authentication.BaseAuthentication',
+    #    'rest_framework.authentication.SessionAuthentication',
+    #),
     'PAGINATE_BY': 10,
     'PAGINATE_BY_PARAM': 'page_size'
 }

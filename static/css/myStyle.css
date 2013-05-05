@@ -22,7 +22,7 @@
     float:right;
 }
 
-.personName {
+.leadName {
     margin-bottom: 0;
     margin-top: 0;
 }
@@ -62,7 +62,7 @@ div.ng-view {
     margin-top: 60px;
 }
 
-.personHeadline {
+.leadHeadline {
     display:inline !important;
     margin-left: 0 !important;
 }
@@ -90,6 +90,10 @@ div.ng-view {
     display: inline;
 }
 
+.timestamp {
+    font-size: 12px;
+}
+
 @media (max-width: 767px) {
     .row-fluid.streamList {
         text-align: center;
@@ -108,4 +112,8 @@ div.ng-view {
 
 @media (max-width: 767px) {
 .hero-unit {padding:15px}
+}
+
+.navbar-inner {
+    height: 41px !important;
 }
