@@ -7,6 +7,8 @@ from rest_framework.response import Response
 from rest_framework import generics, parsers, authentication
 from rest_framework import exceptions as rest_exceptions
 
+from core import util
+
 from .models import Lead, LeadEvent
 from .serializers import LeadSerializer
 
@@ -14,12 +16,6 @@ class LeadListView(generics.ListCreateAPIView):
     '''
     Listing and creating leads
     '''
-    if not request.user.is_authenticated():
-        raise rest_exceptions.PermissionDenied()
-    elif not request.user.has_perm("list_leads"):
-        raise rest_exceptions.PermissionDenied()
-    else:
-        pass
         
     parser_classes = (parsers.JSONParser,)
     serializer_class = LeadSerializer
@@ -32,6 +28,10 @@ class LeadListView(generics.ListCreateAPIView):
         obj.owner = self.request.user
 
     def post_save(self, obj, created=False):
+
+        if util.is_authed(self.request.user, 'list_leads'):
+            pass
+
         if created:
             # TODO: Integrate with Dustin's linkedin service
             # URL
