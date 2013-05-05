@@ -43,8 +43,7 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
 
         $http.get("/api/leads/")
             .success(function (data) {
-                console.log(data);
-                $scope.leads = data;
+                $scope.leads = data.results;
             })
             .error(function (data, status) {
                 //TODO: Error handling...
@@ -56,7 +55,7 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
         };
 
         $scope.addLead = function () {
-            $http.post("/api/leads/")//TODO: POST OR GET?
+            $http.post("/api/leads/", $scope.lead)//TODO: POST OR GET?
                 .success(function (data) {
                     //TODO: Show success
                     $scope.lead.url = "";
@@ -127,6 +126,12 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
             templateUrl: "/static/tmplts/loginModal.tmplt.html"
         }
     })
+    .directive("paymentModal", function() {
+        return {
+            restrict: "A",
+            templateUrl: "/static/tmplts/paymentModal.tmplt.html"
+        }
+    })
     .controller("LoginModalCtrl", function($scope, $http, $location, authService) {
         $scope.auth = {
             username: "",
@@ -145,6 +150,7 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
             $http.post("/api/login/", {username: $scope.auth.username, password: $scope.auth.password})
                 .success(function (data) {
                     authService.username = data.username;
+                    authService.loggedIn = true;
                     $location.path("/dash");
                 })
                 .error(function (data, status) {
@@ -157,7 +163,7 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
             dialogFade: true
         };
     })
-    .controller("RegisterModalCtrl", function($scope, $http, $location) {
+    .controller("RegisterModalCtrl", function($scope, $http, $location, $rootScope) {
         $scope.user = {
             first_name: "",
             last_name: "",
@@ -179,9 +185,11 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
         $scope.register = function () {
             var data = $.extend({}, $scope.user);
             delete data.confirmPassword;
+
             $http.post("/api/register/", data)
                 .success(function (data) {
-                    //TODO: Open payment modal...
+                    $scope.shouldBeOpen = false;
+                    $rootScope.$broadcast("showPayModal", {message: "Thank you for registering"});
                 })
                 .error(function (data, status) {
                     //TODO: Error handling...
@@ -192,4 +200,31 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
             backdropFade: true,
             dialogFade: true
         };
+    })
+    .controller("PaymentModalCtrl", function($scope, $http, $location, $rootScope, authService) {
+        $rootScope.$on("showPayModal", function(scope, data) {
+           $scope.message = data.message;
+           $scope.open();
+        });
+
+        $scope.username = authService.username;
+
+        $scope.open = function () {
+            $scope.shouldBeOpen = true;
+        };
+
+        $scope.exit = function () {
+            $scope.shouldBeOpen = false;
+        };
+
+        $scope.opts = {
+            backdropFade: true,
+            dialogFade: true
+        };
+
+        $scope.$watch(function(){return authService.username}, function(n,o) {
+            if (n == o)
+                return;
+            $scope.username = n;
+        })
     });
