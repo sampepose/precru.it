@@ -189,7 +189,8 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
             $http.post("/api/register/", data)
                 .success(function (data) {
                     $scope.shouldBeOpen = false;
-                    $rootScope.$broadcast("showPayModal", {message: "Thank you for registering"});
+                    $location.path("/addLead");
+                  //TODO: Add later  $rootScope.$broadcast("showPayModal", {message: "Thank you for registering"});
                 })
                 .error(function (data, status) {
                     //TODO: Error handling...
