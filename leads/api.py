@@ -14,6 +14,13 @@ class LeadListView(generics.ListCreateAPIView):
     '''
     Listing and creating leads
     '''
+    if not request.user.is_authenticated():
+        raise rest_exceptions.PermissionDenied()
+    elif not request.user.has_perm("list_leads"):
+        raise rest_exceptions.PermissionDenied()
+    else:
+        pass
+        
     parser_classes = (parsers.JSONParser,)
     serializer_class = LeadSerializer
     model = Lead

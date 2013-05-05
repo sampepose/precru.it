@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.db import IntegrityError
 from django.db.models import Q
 from django.contrib import auth
@@ -88,6 +88,9 @@ class RegisterView(generics.SingleObjectAPIView):
             user.last_name = last_name
         
         user.save()
+
+        g = Group.objects.get(name='BaseUsers') 
+        g.user_set.add(your_user)
 
         serializer = UserSerializer(user)
         return Response(serializer.data)
