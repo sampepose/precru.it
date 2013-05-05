@@ -11,11 +11,15 @@
             </div>
             <span class="email" ng-bind="person.email"></span>
             <br>
-            <div class="fl"><span class="attn">&raquo; </span><strong ng-bind="person.event"></strong></div>
-			<ul class="nav nav-list">						
-				<li class="divider"></li>
-				<li class="nav-header"><span class="fr" ng-bind="person.timestamp"></span></li>
-			</ul>
+            <div>
+                <span class="attn">&raquo; </span><strong ng-bind="person.events[0].title"></strong>
+                <span class="fr timestamp" ng-bind="person.events[0].timestamp"></span>
+            </div>
+            <div collapse="areEventsCollapsed" ng-repeat="event in person.events.slice(1, person.events.length)">
+                <span class="attn">&raquo; </span><strong ng-bind="event.title"></strong>
+                <span class="fr timestamp" ng-bind="event.timestamp"></span>
+            </div>
+            <button class="btn" ng-click="areEventsCollapsed = !areEventsCollapsed" ng-show="person.events.length > 1">Show More</button>
         </div>
     </div>
 </div>

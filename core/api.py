@@ -87,7 +87,7 @@ class RegisterView(generics.SingleObjectAPIView):
         user.save()
 
         g = Group.objects.get(name='BaseUsers') 
-        g.user_set.add(your_user)
+        g.user_set.add(user)
 
         serializer = UserSerializer(user)
         return Response(serializer.data)
