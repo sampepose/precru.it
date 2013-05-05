@@ -12,7 +12,7 @@
             <span class="email" ng-bind="lead.email"></span>
             <br>
             <div>
-                <span class="attn">&raquo; </span><strong ng-bind="lead.events[0].title"></strong>
+                <span class="attn">&raquo; </span><strong ng-bind="lead.events[0].event_title"></strong>
                 <span class="fr timestamp" ng-bind="lead.events[0].timestamp"></span>
             </div>
             <div collapse="areEventsCollapsed" ng-repeat="event in lead.events.slice(1, lead.events.length)">

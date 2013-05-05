@@ -227,19 +227,4 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
                 return;
             $scope.username = n;
         })
-    })
-    .directive("formEnter", function(){
-        return {
-            restrict:"A",
-            scope: {
-                callback:"&"
-            },
-            link: function(scope, el) {
-                el.find("input").on('keypress', function(e) {
-                    if (e.which == 13) {
-                        scope.callback();
-                    }
-                });
-            }
-        }
     });
