@@ -28,8 +28,8 @@ DATABASES = {
 
 # DB provided by Heroku <3
 # DATABASES['default'] = dj_database_url.config(default='postgres://peekedin:password@localhost:5432/peekedin')
-print(os.eviron['DATABASE_URL'])
-DATABASES['default'] =  dj_database_url.config(os.eviron['DATABASE_URL'])
+print(os.environ['DATABASE_URL'])
+DATABASES['default'] =  dj_database_url.config(os.environ['DATABASE_URL'])
 
 # From Heroku getting started guide. Not sure? Sounds important.
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
