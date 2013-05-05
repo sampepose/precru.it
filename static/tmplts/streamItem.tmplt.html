@@ -1,7 +1,7 @@
 <div class="well streamItem">
     <div class="row-fluid">
         <div class="di fl profileImageContainer span2">
-            <img class="profileImage" ng-src="{{lead.imageUrl}}"/>
+            <img class="profileImage" ng-src="{{lead.image_url}}"/>
         </div>
         <div class="span10">
             <h3 class="leadName di"><a ng-href="{{lead.url}}" ng-bind="lead.name" target="_blank"></a>,</h3>
@@ -16,7 +16,7 @@
                 <span class="fr timestamp" ng-bind="lead.events[0].timestamp"></span>
             </div>
             <div collapse="areEventsCollapsed" ng-repeat="event in lead.events.slice(1, lead.events.length)">
-                <span class="attn">&raquo; </span><strong ng-bind="event.title"></strong>
+                <span class="attn">&raquo; </span><strong ng-bind="event.event_title"></strong>
                 <span class="fr timestamp" ng-bind="event.timestamp"></span>
             </div>
             <button class="btn" ng-click="areEventsCollapsed = !areEventsCollapsed" ng-show="lead.events.length > 1">Show More</button>
