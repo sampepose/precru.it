@@ -117,3 +117,7 @@ div.ng-view {
 .navbar-inner {
     height: 41px !important;
 }
+
+.tac {
+    text-align: center;
+}
