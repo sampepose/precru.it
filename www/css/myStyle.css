@@ -79,6 +79,12 @@ div.ng-view {
 
 .profileImage {
     max-height: 100px;
+    height:100px;
+}
+
+.profileImageContainer {
+    width:100px;
+    text-align: center;
 }
 
 .di {
@@ -92,5 +98,15 @@ div.ng-view {
 
     .profileImage {
         height: 10em;
+        max-height:10em;
     }
+}
+
+/**** CSS overrides and additions - JG ****/
+.hero-unit {padding:25px}
+.attn {color:#ffae00; font-weight:bold; font-size:22px; display:inline !important;}
+.email {color:#888; font-size:12px;}
+
+@media (max-width: 767px) {
+.hero-unit {padding:15px}
 }
