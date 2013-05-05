@@ -44,6 +44,11 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
         $http.get("/api/leads/")
             .success(function (data) {
                 $scope.leads = data.results;
+                for (var i = 0; i < $scope.leads.length; i++) {
+                    if (!$scope.leads[i].url) {
+                        $scope.leads[i].url = "../static/img/icon_no_photo.png";
+                    }
+                }
             })
             .error(function (data, status) {
                 //TODO: Error handling...
