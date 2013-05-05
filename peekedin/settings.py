@@ -136,6 +136,7 @@ INSTALLED_APPS = (
     'south',
     'social_auth',
     'dashboard',
+    'api',
 )
 
 # A sample logging configuration. The only tangible logging
