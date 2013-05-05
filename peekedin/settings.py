@@ -5,7 +5,7 @@ import os
 
 BASE_DIR = os.path.basename(os.path.abspath(__file__))
 
-DEBUG = True
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', ''))
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
