@@ -5,7 +5,7 @@
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-th-list"></span>
             </a>
-            <a class="brand" href="#/home"><img src="/img/precruit-nav.png" height="40" alt="Precru.it" /></a>
+            <a class="brand" href="#/home"><img src="../../static/img/precruit-nav.png" height="40" alt="Precru.it" /></a>
             <div class="nav-collapse collapse">
                 <ul class="nav pull-left">
                     <li><a href="#/dash" ui-route="/home" ng-hide="$uiRoute"><i class="icon-user" ></i> Stream</a></li>
@@ -69,16 +69,16 @@
 		<div class="modal-footer">
 			<!-- Stripe -->
 			<form action="" method="POST">
-				<div class="modal-body">
+				<span data-toggle="modal"  data-dismiss="modal">
 				  <script
-					src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"
+					src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button" 
 					data-key="pk_test_E79QPnCW1icddzdNWRdBnXsZ"
 					data-amount="9900"
 					data-name="Precru.it"
 					data-description="$99 per month"
-					data-image="/128x128.png">
+					data-image="../../static/img/500_leads.jpg">
 				  </script>
-				</div>
+				</span>
 			</form>
 		</div>
 </div>
