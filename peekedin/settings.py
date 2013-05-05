@@ -142,6 +142,22 @@ INSTALLED_APPS = (
     'leads',
 )
 
+# Authentication (for django and social auth)
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.contrib.linkedin.LinkedinBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# Django Rest Framework configuration
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        #'core.authentication.BaseAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'PAGINATE_BY': 10,
+    'PAGINATE_BY_PARAM': 'page_size'
+}
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
