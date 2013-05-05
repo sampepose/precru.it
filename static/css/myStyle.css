@@ -81,6 +81,11 @@ div.ng-view {
     max-height: 100px;
 }
 
+.profileImageContainer {
+    width:100px;
+    text-align: center;
+}
+
 .di {
     display: inline;
 }
@@ -92,5 +97,6 @@ div.ng-view {
 
     .profileImage {
         height: 10em;
+        max-height:10em;
     }
 }
