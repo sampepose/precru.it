@@ -135,18 +135,25 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'south',
-    'social_auth',
     'rest_framework',
     'dashboard',
     'core',
     'leads',
 )
 
+<<<<<<< HEAD
 # Authentication (for django and social auth)
 AUTHENTICATION_BACKENDS = (
     'social_auth.backends.contrib.linkedin.LinkedinBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
+=======
+# Extended user profile
+AUTH_PROFILE_MODULE= 'core.UserProfile'
+
+LINKEDIN_TOKEN = '8bd33660-2174-4381-89df-9bd8e2b0aac0'
+LINKEDIN_SECRET = '5586ae55-478c-4b38-851d-0f53b10110c1'
+>>>>>>> staging
 
 # Django Rest Framework configuration
 REST_FRAMEWORK = {

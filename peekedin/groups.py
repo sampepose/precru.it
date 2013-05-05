@@ -17,8 +17,10 @@ def init_groups():
 	paid_users.save()
 
 def add_or_get_permission(name, content_type, codename):
-	permission = Permission.objects.get(content_type=content_type, codename=codename)
-	if permission is None:
-		permission = Permission(name=name, content_type=content_type, codename=codename)
-		permission.save()
-	return permission
+    try:
+        permission = Permission.objects.get(content_type=content_type, codename=codename)
+    except Permission.DoesNotExist:
+        permission = Permission(name=name, content_type=content_type, codename=codename)
+        permission.save()
+    
+    return permission

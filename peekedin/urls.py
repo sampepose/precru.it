@@ -30,20 +30,25 @@ def api_root(request, format=None):
 
 urlpatterns = patterns('',
     # API stuff
-    (r'^api/$', api_root),
+    url(r'^api/$', api_root),
     url(r'^api/', include('core.urls')),
     url(r'^api/leads/', include('leads.urls')),
-    
+ 
     # Admin URL
     url(r'^_foo/admin/', include(admin.site.urls)),
+
+    # linked in auth
+    url(r'^linkedin/login$', 'core.views.linkedin_login'),
+    url(r'^linkedin/logout$', 'core.views.linkedin_logout'),
+    url(r'^linkedin/authenticated$', 'core.views.linkedin_authenticated'),
 
     # Dashboard
     url(r'', include('dashboard.urls')),
 )
 
-#urlpatterns += patterns('',
-#    (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
-#)
+urlpatterns += patterns('',
+    (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+)
 
 # Format suffixes
 urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json', 'api'])

@@ -16,12 +16,18 @@ class LeadListView(generics.ListCreateAPIView):
     '''
     Listing and creating leads
     '''
-        
     parser_classes = (parsers.JSONParser,)
     serializer_class = LeadSerializer
     model = Lead
 
     def get_queryset(self):
+        if not self.request.user.is_authenticated():
+            raise rest_exceptions.PermissionDenied()
+        elif not self.request.user.has_perm("list_leads"):
+            raise rest_exceptions.PermissionDenied()
+        else:
+            pass
+
         return Lead.objects.filter(owner=self.request.user)
 
     def pre_save(self, obj):
