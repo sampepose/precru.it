@@ -5,11 +5,11 @@
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-th-list"></span>
             </a>
-            <a class="brand">Precru.it</a>
+            <a class="brand" href="#/home">Precru.it</a>
             <div class="nav-collapse collapse">
                 <ul class="nav pull-left">
-                    <li><a href="#/dash"><i class="icon-user"></i> Stream</a></li>
-                    <li><a href="#/addLeads"><i class="icon-plus"></i> Add Leads</a></li>
+                    <li><a href="#/dash" ui-route="/home" ng-hide="$uiRoute"><i class="icon-user" ></i> Stream</a></li>
+                    <li><a href="#/addLeads" ui-route="/home" ng-hide="$uiRoute"><i class="icon-plus"></i> Add Leads</a></li>
                 </ul>
 				<ul class="nav pull-right">
                     <li><a>Welcome, NashHacker!</a><li>
