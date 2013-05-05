@@ -91,13 +91,3 @@ class RegisterView(generics.SingleObjectAPIView):
 
         serializer = UserSerializer(user)
         return Response(serializer.data)
-        
-
-
-
-
-
-
-
-
-

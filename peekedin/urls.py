@@ -23,14 +23,14 @@ def api_root(request, format=None):
             'login': reverse('login-view', request=request, format=format),
             'logout': reverse('logout-view', request=request, format=format),
         },
-        'leads': {
-        },
+        'leads': reverse('lead-list-view', request=request, format=format),
     })
 
 urlpatterns = patterns('',
     # API stuff
     (r'^api/$', api_root),
-    url(r'^api/', include('core.urls')),
+    url(r'^api/core/', include('core.urls')),
+    url(r'^api/leads/', include('leads.urls')),
     
     # Admin URL
     url(r'^_foo/admin/', include(admin.site.urls)),

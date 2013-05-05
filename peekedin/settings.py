@@ -139,6 +139,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'dashboard',
     'core',
+    'leads',
 )
 
 # A sample logging configuration. The only tangible logging
