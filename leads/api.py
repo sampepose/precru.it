@@ -1,3 +1,5 @@
+import requests 
+
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.db.models import Q
@@ -21,27 +23,19 @@ class LeadListView(generics.ListCreateAPIView):
     model = Lead
 
     def get_queryset(self):
-        if not self.request.user.is_authenticated():
-            raise rest_exceptions.PermissionDenied()
-        elif not self.request.user.has_perm("list_leads"):
-            raise rest_exceptions.PermissionDenied()
-        else:
-            pass
-
+        utils.is_authed(self.request.user, 'auth.list_leads')
         return Lead.objects.filter(owner=self.request.user)
 
     def pre_save(self, obj):
         obj.owner = self.request.user
 
     def post_save(self, obj, created=False):
-
-        if utils.is_authed(self.request.user, 'list_leads'):
-            pass
-
         if created:
             # TODO: Integrate with Dustin's linkedin service
             # URL
             # Oauth token
+
+            #http://precruit-api.yuna.codemeu.com/api/v1/fetch_lead/AQW04SSowQGitG_JwyZxqZV5g_SYUk9b4DIsQ0K7EJzYTy8KNsqapEsQjJ7ZZ4X1LlrVaJQt4D3CkKNYS9mwxxQP4cUF2m1t9BTR2OFFos1ANUz2lCDx-BaQ9vqXl1lJWY7gT6BeMGZ80BxrSd1s2DaUzHCnUtYBErLSdH5UVA81KMx05Ek?url=
 
             obj.name = 'Abe Music'
             obj.email = 'abe.music@gmail.com'
@@ -55,3 +49,6 @@ class LeadListView(generics.ListCreateAPIView):
 
         return super(LeadListView, self).post_save(obj, created)
 
+class LeadDetailView(generics.RetrieveDestroyAPIView):
+    model = Lead
+    serializer_class = LeadSerializer
