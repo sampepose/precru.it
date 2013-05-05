@@ -6,7 +6,7 @@
         <div class="span10">
             <h3 class="personName di"><a ng-href="{{person.url}}" ng-bind="person.name" target="_blank"></a>,</h3>
             <span class="personHeadline" ng-bind="person.headline"></span>
-            <div class="di" ng-click="removePerson()"><i class="icon-remove fr"></i></div>
+            <div class="di" ng-click="removePerson()"><button class="pull-right btn dropdown-toggle"><i class="icon-remove fr"></i></button></div>
             <span ng-bind="person.email"></span>
             <br>
             <strong class="fl" ng-bind="person.event"></strong>
