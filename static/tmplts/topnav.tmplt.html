@@ -37,33 +37,12 @@
                             <div register-modal class="di"></div>
                         </div>
                         <!-- End Register Modal -->
+
+                        <div payment-modal style="display: none;"></div>
                     </div>
                     <!-- end -->
                 </ul>
             </div>
         </div>
     </div>
-</div>
-
-<!-- Pay Modal -->
-<div id="payModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-body">
-			<h3>Thanks for Registering, [name]</h3>
-			<p> Precru.it services are $99.00 per month, please use a payment option below.</p>
-		</div>
-		<div class="modal-footer">
-			<!-- Stripe -->
-			<form action="" method="POST">
-				<span data-toggle="modal"  data-dismiss="modal">
-				  <script
-					src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button" 
-					data-key="pk_test_E79QPnCW1icddzdNWRdBnXsZ"
-					data-amount="9900"
-					data-name="Precru.it"
-					data-description="$99 per month"
-					data-image="../../static/img/500_leads.jpg">
-				  </script>
-				</span>
-			</form>
-		</div>
 </div>
