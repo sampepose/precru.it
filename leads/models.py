@@ -27,4 +27,7 @@ class LeadEvent(models.Model):
     # Event type (field that changed)
     event_type = models.CharField(max_length=64)
 
+    # Event detail (field that changed)
+    event_detail = models.CharField(max_length=128, blank=True)
+
     event_datetime = models.DateTimeField(auto_now=True, auto_now_add=True) 
