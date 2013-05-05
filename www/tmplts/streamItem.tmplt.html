@@ -1,0 +1,19 @@
+<div class="container well streamItem">
+    <div class="row-fluid">
+        <div class="span2">
+            <img class="profileImage" ng-src="{{person.imageUrl}}"/>
+        </div>
+        <div class="span10">
+            <h3 class="personName di"><a ng-href="{{person.url}}" ng-bind="person.name" target="_blank"></a>,</h3>
+            <span class="personHeadline" ng-bind="person.headline"></span>
+            <div class="di" ng-click="removePerson()"><i class="icon-remove fr"></i></div>
+            <span ng-bind="person.email"></span>
+            <br>
+            <strong class="fl" ng-bind="person.event"></strong>
+			<ul class="nav nav-list">						
+				<li class="divider"></li>
+				<li class="nav-header"><span class="fr" ng-bind="person.timestamp"></span></li>
+			</ul>
+        </div>
+    </div>
+</div>

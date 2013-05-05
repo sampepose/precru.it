@@ -1,0 +1,96 @@
+.nav-list {
+  padding-right: 15px;
+  padding-left: 0px;
+  margin-bottom: 0;
+}
+
+.nav-list .nav-header {
+  margin-right: -15px;
+  margin-left: -30px !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.divider {
+  margin-left: -15px !important;
+ }
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float:right;
+}
+
+.personName {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.example-repeat-enter-setup,
+.example-repeat-leave-setup,
+.example-repeat-move-setup {
+    -webkit-transition:all linear 0.5s;
+    -moz-transition:all linear 0.5s;
+    -ms-transition:all linear 0.5s;
+    -o-transition:all linear 0.5s;
+    transition:all linear 0.5s;
+}
+
+.example-repeat-enter-setup {
+    line-height:0;
+    opacity:0;
+}
+.example-repeat-enter-setup.example-repeat-enter-start {
+    line-height:20px;
+    opacity:1;
+}
+
+.example-repeat-leave-setup {
+    opacity:1;
+    line-height:20px;
+}
+.example-repeat-leave-setup.example-repeat-leave-start {
+    opacity:0;
+    line-height:0;
+}
+
+.example-repeat-move-setup { }
+.example-repeat-move-setup.example-repeat-move-start { }
+
+div.ng-view {
+    margin-top: 60px;
+}
+
+.personHeadline {
+    display:inline !important;
+    margin-left: 0 !important;
+}
+
+.streamItem {
+    font-size: 18px;
+    padding: 10px !important;
+}
+
+.streamItem span {
+    display: block;
+    margin-left: 15px;
+}
+
+.profileImage {
+    max-height: 100px;
+}
+
+.di {
+    display: inline;
+}
+
+@media (max-width: 767px) {
+    .row-fluid.streamList {
+        text-align: center;
+    }
+
+    .profileImage {
+        height: 10em;
+    }
+}

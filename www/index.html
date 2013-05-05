@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!-- -->
+
+<html ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Precru.it</title>
+    <link rel="stylesheet" href="css/myStyle.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-responsive.min.css">	
+</head>
+<body>
+
+<ng-include src="'tmplts/topnav.tmplt.html'" ng-controller="HeaderCtrl" ui-route="/home" ng-hide="$uiRoute"></ng-include>
+
+<div ng-view class="ng-view"></div>
+<div olark-chat></div>
+
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+<script src="libs/bootstrap.min.js"></script>
+<script src="libs/moment.min.js"></script>
+<script src="services.js"></script>
+<script src="routes.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

@@ -2,3 +2,4 @@ static/admin
 venv
 *.pyc
 *.swp
+.idea
