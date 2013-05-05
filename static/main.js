@@ -53,6 +53,21 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
             .error(function (data, status) {
                 //TODO: Error handling...
             });
+
+        $scope.refresh = function() {
+            $http.get("/api/leads/refresh/")
+                .success(function (data) {
+                    $scope.leads = data.results;
+                    for (var i = 0; i < $scope.leads.length; i++) {
+                        if (!$scope.leads[i].url) {
+                            $scope.leads[i].url = "../static/img/icon_no_photo.png";
+                        }
+                    }
+                })
+                .error(function (data, status) {
+                    //TODO: Error handling...
+                });
+        };
     }])
     .controller("AddLeadsCtrl", ["$scope", "$http", function ($scope, $http) {
         $scope.lead = {
