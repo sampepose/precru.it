@@ -1,48 +1,89 @@
 "use strict";
 
-angular.module("app", ["services", "ui.route"])
+angular.module("app", ["services", "ui.route", "ui.bootstrap"])
     .config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
       //  $locationProvider.html5Mode(true);
         $routeProvider
             .when("/", {redirectTo: "/home"})
             .when("/home", {templateUrl: "/static/tmplts/home.tmplt.html"})
             .when("/dash", {templateUrl: "/static/tmplts/dash.tmplt.html", controller: "DashCtrl"})
-            .when("/confirmRegistration", {templateUrl: "/static/tmplts/confirmRegistration.tmplt.html"})
             .when("/myAccount", {templateUrl: "/static/tmplts/myAccount.tmplt.html"})
-			.when("/addLeads", {templateUrl: "/static/tmplts/addLeads.tmplt.html"});
+			.when("/addLead", {templateUrl: "/static/tmplts/addLeads.tmplt.html", controller:"AddLeadsCtrl"});
     }])
-    .controller("HeaderCtrl", ["$scope", "$location", "authService", function($scope, $location, authService){
-        $scope.$on("$routeChangeStart", function(next, current) {
-            if (current && current.$$route.templateUrl == "/static/tmplts/home.tmplt.html" && authService.loggedIn) {
-                $location.path("/dash");
-            }
-        })
-    }])
-    .controller("DashCtrl", ["$scope", function ($scope) {
-        $scope.people =
-            [
-                {
-                    name: "Hana Drake",
-                    email: "hana.drake@gmail.com",
-                    url: "http://www.linkedin.com",
-                    imageUrl: "",
-                    headline: "Chief Executive Officer",
-                    event: "Updated Recommendations",
-                    timestamp: moment().subtract('m', Math.random()*10).fromNow()
+    .controller("HeaderCtrl", ["$scope", "$http", "$location", "authService", "pingService",
+        function ($scope, $http, $location, authService, pingService) {
+            pingService.init();
+            $scope.username = authService.username;
+
+            $scope.$on("$routeChangeStart", function (next, current) {
+                if (current && current.$$route.templateUrl == "/static/tmplts/home.tmplt.html" && authService.loggedIn) {
+                    $location.path("/dash");
                 }
-            ];
+            });
+
+            $scope.logout = function () {
+                $http.get("/api/logout/")
+                    .success(function (data) {
+                        $location.path("/home");
+                        authService.loggedIn = false;
+                    })
+                    .error(function (data, status) {
+                        //TODO: Error handling...
+                    });
+            };
+
+            $scope.$watch(function(){return authService.username}, function(n,o) {
+                if (n == o)
+                    return;
+                $scope.username = n;
+            })
+        }])
+    .controller("DashCtrl", ["$scope", "$http", function ($scope, $http) {
+        $scope.leads = [];
+
+        $http.get("/api/leads/")
+            .success(function (data) {
+                $scope.leads = data.results;
+            })
+            .error(function (data, status) {
+                //TODO: Error handling...
+            });
     }])
-    .directive("streamItem", function() {
+    .controller("AddLeadsCtrl", ["$scope", "$http", function ($scope, $http) {
+        $scope.lead = {
+            url : ""
+        };
+
+        $scope.addLead = function () {
+            $http.post("/api/leads/", $scope.lead)//TODO: POST OR GET?
+                .success(function (data) {
+                    //TODO: Show success
+                    $scope.lead.url = "";
+                })
+                .error(function (data, status) {
+                    //TODO: Error handling...
+                });
+        };
+
+    }])
+    .directive("streamItem", function($http) {
         return {
             restrict: "A",
             templateUrl: "/static/tmplts/streamItem.tmplt.html",
             scope : {
-                people: "=",
-                person: "="
+                leads: "=",
+                lead: "="
             },
             controller: function($scope) {
-                $scope.removePerson = function() {
-                    $scope.people.splice($scope.people.indexOf($scope.person), 1);
+                $scope.areEventsCollapsed = true;
+                $scope.removeLead = function() {
+                    $http.delete("/api/leads/" + $scope.lead.id)
+                        .success(function (data) {
+                            $scope.leads.splice($scope.leads.indexOf($scope.lead), 1);
+                        })
+                        .error(function (data, status) {
+                            //TODO: Error handling...
+                        });
                 };
             }
         }
@@ -72,4 +113,118 @@ angular.module("app", ["services", "ui.route"])
                 olark.identify('1097-357-10-9238');
             }
         }
+    })
+    .directive("registerModal", function() {
+        return {
+            restrict: "A",
+            templateUrl: "/static/tmplts/registerModal.tmplt.html"
+        }
+    })
+    .directive("loginModal", function() {
+        return {
+            restrict: "A",
+            templateUrl: "/static/tmplts/loginModal.tmplt.html"
+        }
+    })
+    .directive("paymentModal", function() {
+        return {
+            restrict: "A",
+            templateUrl: "/static/tmplts/paymentModal.tmplt.html"
+        }
+    })
+    .controller("LoginModalCtrl", function($scope, $http, $location, authService) {
+        $scope.auth = {
+            username: "",
+            password: ""
+        };
+
+        $scope.open = function () {
+            $scope.shouldBeOpen = true;
+        };
+
+        $scope.exit = function () {
+            $scope.shouldBeOpen = false;
+        };
+
+        $scope.login = function () {
+            $http.post("/api/login/", {username: $scope.auth.username, password: $scope.auth.password})
+                .success(function (data) {
+                    authService.username = data.username;
+                    authService.loggedIn = true;
+                    $location.path("/dash");
+                })
+                .error(function (data, status) {
+                    //TODO: Error handling...
+                })
+        };
+
+        $scope.opts = {
+            backdropFade: true,
+            dialogFade: true
+        };
+    })
+    .controller("RegisterModalCtrl", function($scope, $http, $location, $rootScope) {
+        $scope.user = {
+            first_name: "",
+            last_name: "",
+            username: "",
+            email: "",
+            password: "",
+            confirmPassword:""
+
+        };
+
+        $scope.open = function () {
+            $scope.shouldBeOpen = true;
+        };
+
+        $scope.exit = function () {
+            $scope.shouldBeOpen = false;
+        };
+
+        $scope.register = function () {
+            var data = $.extend({}, $scope.user);
+            delete data.confirmPassword;
+
+            $http.post("/api/register/", data)
+                .success(function (data) {
+                    $scope.shouldBeOpen = false;
+                    $rootScope.$broadcast("showPayModal", {message: "Thank you for registering"});
+                })
+                .error(function (data, status) {
+                    //TODO: Error handling...
+                })
+        };
+
+        $scope.opts = {
+            backdropFade: true,
+            dialogFade: true
+        };
+    })
+    .controller("PaymentModalCtrl", function($scope, $http, $location, $rootScope, authService) {
+        $rootScope.$on("showPayModal", function(scope, data) {
+           $scope.message = data.message;
+           $scope.open();
+        });
+
+        $scope.username = authService.username;
+
+        $scope.open = function () {
+            $scope.shouldBeOpen = true;
+        };
+
+        $scope.exit = function () {
+            $scope.shouldBeOpen = false;
+        };
+
+        $scope.opts = {
+            backdropFade: true,
+            dialogFade: true
+        };
+
+        $scope.$watch(function(){return authService.username}, function(n,o) {
+            if (n == o)
+                return;
+            $scope.username = n;
+        })
     });

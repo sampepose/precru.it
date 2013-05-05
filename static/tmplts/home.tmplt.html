@@ -34,7 +34,10 @@
 			</ul>
             <p align="center">
 			<!-- Button to trigger modal -->
-				<a href="#registerModal" class="btn btn-primary btn-large" role="button" data-toggle="modal">Get Started</a>
+            <div ng-controller="RegisterModalCtrl">
+                <a href="" ng-click="open()" class="btn btn-primary btn-large">Get Started</a>
+                <div register-modal></div>
+            </div>
 			<!-- end -->
 			</p>
             <script type="IN/Login" data-onAuth="onLinkedInAuth"></script>

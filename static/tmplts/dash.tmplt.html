@@ -1,7 +1,18 @@
-<div class="row-fluid streamList" ng-repeat="person in people" ng-animate="{enter: 'example-repeat-enter',
+<div class="row-fluid streamList" ng-repeat="lead in leads" ng-animate="{enter: 'example-repeat-enter',
                         leave: 'example-repeat-leave',
                         move: 'example-repeat-move'}">
     <div class="span3"></div>
-    <div class="span6" stream-item data-person="person" data-people="people"></div>
+    <div class="span6" stream-item data-lead="lead" data-leads="leads"></div>
+    <div class="span3"></div>
+</div>
+<div class="row-fluid streamList" ng-show="leads.length <= 0" ng-animate="{enter: 'example-repeat-enter',
+                        leave: 'example-repeat-leave',
+                        move: 'example-repeat-move'}">
+    <div class="span3"></div>
+    <div class="span6 well streamItem">
+        <h3>
+            You are not following anyone!
+        </h3>
+    </div>
     <div class="span3"></div>
 </div>

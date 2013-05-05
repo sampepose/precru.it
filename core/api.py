@@ -25,7 +25,9 @@ class LoginView(generics.SingleObjectAPIView):
 
         if user is not None and user.is_active:
             auth.login(request, user)
-            return Response({})
+
+            serializer = UserSerializer(user)
+            return Response(serializer.data)
         raise rest_exceptions.NotAuthenticated('Authentication failed.')
 
 class LogoutView(generics.SingleObjectAPIView):
@@ -38,6 +40,8 @@ class PingView(generics.SingleObjectAPIView):
     Ping. Pong.
     '''
     def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated():
+            raise rest_exceptions.NotAuthenticated('Not authenticated')
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
 
@@ -87,7 +91,10 @@ class RegisterView(generics.SingleObjectAPIView):
         user.save()
 
         g = Group.objects.get(name='BaseUsers') 
-        g.user_set.add(your_user)
+        g.user_set.add(user)
+
+        g = Group.objects.get(name='PaidUsers') 
+        g.user_set.add(user)
 
         serializer = UserSerializer(user)
         return Response(serializer.data)

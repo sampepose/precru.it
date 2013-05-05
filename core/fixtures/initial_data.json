@@ -1,0 +1,57 @@
+[
+    {
+        "pk": null,
+        "model": "auth.user",
+        "fields": {
+            "username": "admin",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": true,
+            "is_staff": true,
+            "last_login": "2013-05-05T21:09:44.742Z",
+            "groups": [],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$10000$4XgPJ0X6QIye$R2i1XDr3ZUwwbMkosY3rrdAqHUoWEBrWj0ASDOSHX68=",
+            "email": "foo@bar.com",
+            "date_joined": "2013-05-05T21:09:34.208Z"
+        }
+    },
+    {
+        "pk": 34,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "has_paid",
+            "name": "Has paid",
+            "content_type": 3
+        }
+    },
+    {
+        "pk": 35,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "list_leads",
+            "name": "List leads",
+            "content_type": 3
+        }
+    },
+    {
+        "pk": null,
+        "model": "auth.group",
+        "fields": {
+            "name": "BaseUsers",
+            "permissions": []
+        }
+    },
+    {
+        "pk": null,
+        "model": "auth.group",
+        "fields": {
+            "name": "PaidUsers",
+            "permissions": [
+                34,
+                35
+            ]
+        }
+    }
+]

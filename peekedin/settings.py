@@ -113,6 +113,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'peekedin.middleware.disable_csrf',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -149,12 +150,14 @@ AUTH_PROFILE_MODULE= 'core.UserProfile'
 LINKEDIN_TOKEN = '8bd33660-2174-4381-89df-9bd8e2b0aac0'
 LINKEDIN_SECRET = '5586ae55-478c-4b38-851d-0f53b10110c1'
 
+SNITCH_SERVICE_URL = 'http://precruit-api.yuna.codemeu.com/api/v1/fetch_lead/AQW04SSowQGitG_JwyZxqZV5g_SYUk9b4DIsQ0K7EJzYTy8KNsqapEsQjJ7ZZ4X1LlrVaJQt4D3CkKNYS9mwxxQP4cUF2m1t9BTR2OFFos1ANUz2lCDx-BaQ9vqXl1lJWY7gT6BeMGZ80BxrSd1s2DaUzHCnUtYBErLSdH5UVA81KMx05Ek?url='
+
 # Django Rest Framework configuration
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        #'core.authentication.BaseAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-    ),
+    #'DEFAULT_AUTHENTICATION_CLASSES': (
+    #    #'core.authentication.BaseAuthentication',
+    #    'rest_framework.authentication.SessionAuthentication',
+    #),
     'PAGINATE_BY': 10,
     'PAGINATE_BY_PARAM': 'page_size'
 }

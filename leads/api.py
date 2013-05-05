@@ -1,3 +1,6 @@
+import requests 
+import urllib
+
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.db.models import Q
@@ -8,6 +11,7 @@ from rest_framework import generics, parsers, authentication
 from rest_framework import exceptions as rest_exceptions
 
 from core import utils
+from peekedin import settings
 
 from .models import Lead, LeadEvent
 from .serializers import LeadSerializer
@@ -21,37 +25,42 @@ class LeadListView(generics.ListCreateAPIView):
     model = Lead
 
     def get_queryset(self):
-        if not self.request.user.is_authenticated():
-            raise rest_exceptions.PermissionDenied()
-        elif not self.request.user.has_perm("list_leads"):
-            raise rest_exceptions.PermissionDenied()
-        else:
-            pass
-
+        utils.is_authed(self.request.user, 'auth.list_leads')
         return Lead.objects.filter(owner=self.request.user)
 
     def pre_save(self, obj):
         obj.owner = self.request.user
 
     def post_save(self, obj, created=False):
-
-        if utils.is_authed(self.request.user, 'list_leads'):
-            pass
-
         if created:
-            # TODO: Integrate with Dustin's linkedin service
-            # URL
-            # Oauth token
+            url = settings.SNITCH_SERVICE_URL + urllib.quote(obj.url)
+            print "URL: %s" % url
+            req = requests.get(url)
+            data = req.json()
 
-            obj.name = 'Abe Music'
-            obj.email = 'abe.music@gmail.com'
-            obj.headline = 'Master of Badassery'
-            obj.image_url = 'http://m3.licdn.com/mpr/pub/image-uMMI5Hnk_OUipSn1gv69qpNtt03jl-bjsByisKNWh9tQMsqLGBHYVHNge0tS7htGMK/abe-music.jpg'
+            linkedin = data.get('linked_in_response', {})
+            events = data.get('change_response', [])
+
+            first_name = linkedin.get('firstName', '')
+            last_name = linkedin.get('lastName', '')
+
+            obj.name = first_name + ' ' + last_name
+            obj.headline = linkedin.get('headline', '')
+            obj.image_url = linkedin.get('pictureUrl', '')
+            obj.email = linkedin.get('email', '')
+
+            # Add initial "tracking" event
+            obj.events.create(event_type='Now tracking...')
+
+            print "Name: %s" % obj.name
+            print "Headline: %s" % obj.headline
+            print "Image url: %s" % obj.image_url
+            print "Email: %s" % obj.email
+
             obj.save()
-
-            import random
-            for i in range(1, random.randint(2, 6)):
-                obj.events.create(event_type='Event type %d' % i)
 
         return super(LeadListView, self).post_save(obj, created)
 
+class LeadDetailView(generics.RetrieveDestroyAPIView):
+    model = Lead
+    serializer_class = LeadSerializer
