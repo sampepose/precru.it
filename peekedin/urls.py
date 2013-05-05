@@ -13,7 +13,10 @@ urlpatterns = patterns('',
     url(r'^$', include('dashboard.urls')),
 )
 
-if not settings.DEBUG:
-    urlpatterns += patterns('',
-        (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
-    )
+# Remove this comment and indent the following few lines
+# when we're in production. This is to get Heroku to
+# serve up static files properly.
+#if not settings.DEBUG:
+urlpatterns += patterns('',
+    (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+)
