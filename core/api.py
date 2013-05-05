@@ -25,7 +25,9 @@ class LoginView(generics.SingleObjectAPIView):
 
         if user is not None and user.is_active:
             auth.login(request, user)
-            return Response({})
+
+            serializer = UserSerializer(user)
+            return Response(serializer.data)
         raise rest_exceptions.NotAuthenticated('Authentication failed.')
 
 class LogoutView(generics.SingleObjectAPIView):
