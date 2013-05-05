@@ -1,0 +1,25 @@
+<div modal="shouldBeOpen" ng-controller="PaymentModalCtrl">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="exit()" aria-hidden="true">×</button>
+        <h3>Subscription Payment</h3>
+    </div>
+    <div class="modal-body">
+        <h3>{{message}}, {{username}}</h3>
+        <p> Precru.it services are $99.00 per month, please use a payment option below.</p>
+    </div>
+    <div class="modal-footer">
+        <!-- Stripe -->
+        <form action="" method="POST">
+				<span data-toggle="modal"  data-dismiss="modal">
+				  <script
+                          src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"
+                          data-key="pk_test_fLGvByLdHUSAp5Iv5DBtYMlm"
+                          data-amount="9900"
+                          data-name="Precru.it"
+                          data-description="$99 per month"
+                          data-image="../../static/img/500_leads.jpg">
+                  </script>
+				</span>
+        </form>
+    </div>
+</div>
