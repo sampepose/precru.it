@@ -39,9 +39,9 @@ urlpatterns = patterns('',
     url(r'', include('dashboard.urls')),
 )
 
-#urlpatterns += patterns('',
-#    (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
-#)
+urlpatterns += patterns('',
+    (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+)
 
 # Format suffixes
 urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json', 'api'])
@@ -50,4 +50,3 @@ urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json', 'api'])
 urlpatterns += patterns('',
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 )
-

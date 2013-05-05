@@ -5,15 +5,15 @@ angular.module("app", ["services", "ui.route"])
       //  $locationProvider.html5Mode(true);
         $routeProvider
             .when("/", {redirectTo: "/home"})
-            .when("/home", {templateUrl: "tmplts/home.tmplt.html"})
-            .when("/dash", {templateUrl: "tmplts/dash.tmplt.html", controller: "DashCtrl"})
-            .when("/confirmRegistration", {templateUrl: "tmplts/confirmRegistration.tmplt.html"})
-            .when("/myAccount", {templateUrl: "tmplts/myAccount.tmplt.html"})
-			.when("/addLeads", {templateUrl: "tmplts/addLeads.tmplt.html"});
+            .when("/home", {templateUrl: "/static/tmplts/home.tmplt.html"})
+            .when("/dash", {templateUrl: "/static/tmplts/dash.tmplt.html", controller: "DashCtrl"})
+            .when("/confirmRegistration", {templateUrl: "/static/tmplts/confirmRegistration.tmplt.html"})
+            .when("/myAccount", {templateUrl: "/static/tmplts/myAccount.tmplt.html"})
+			.when("/addLeads", {templateUrl: "/static/tmplts/addLeads.tmplt.html"});
     }])
     .controller("HeaderCtrl", ["$scope", "$location", "authService", function($scope, $location, authService){
         $scope.$on("$routeChangeStart", function(next, current) {
-            if (current && current.$$route.templateUrl == "tmplts/home.tmplt.html" && authService.loggedIn) {
+            if (current && current.$$route.templateUrl == "/static/tmplts/home.tmplt.html" && authService.loggedIn) {
                 $location.path("/dash");
             }
         })
@@ -25,54 +25,9 @@ angular.module("app", ["services", "ui.route"])
                     name: "Hana Drake",
                     email: "hana.drake@gmail.com",
                     url: "http://www.linkedin.com",
-                    imageUrl: "http://localhost:8000/www/img/h.jpg",
+                    imageUrl: "",
                     headline: "Chief Executive Officer",
                     event: "Updated Recommendations",
-                    timestamp: moment().subtract('m', Math.random()*10).fromNow()
-                },
-                {
-                    name: "Richard Jackson",
-                    email: "rjackson@gmail.com",
-                    url: "http://www.linkedin.com",
-                    imageUrl: "http://localhost:8000/www/img/r.jpg",
-                    headline: "Directory of Technology",
-                    event: "Changed job position",
-                    timestamp: moment().subtract('m', Math.random()*10).fromNow()
-                },
-                {
-                    name: "Ethan Fender",
-                    email: "ethanfender@hotmail.com",
-                    url: "http://www.linkedin.com",
-                    imageUrl: "http://localhost:8000/www/img/e.jpg",
-                    headline: "Sales Manager",
-                    event: "Changed prior education",
-                    timestamp: moment().subtract('m', Math.random()*10).fromNow()
-                },
-                {
-                    name: "Maryn Lopez",
-                    email: "mlopez@yahoo.org",
-                    url: "http://www.linkedin.com",
-                    imageUrl: "http://localhost:8000/www/img/m.jpg",
-                    headline: "Senior Developer",
-                    event: "Updated job experience",
-                    timestamp: moment().subtract('m', Math.random()*10).fromNow()
-                },
-                {
-                    name: "Kyle McNeil",
-                    email: "kmcneil@aol.com",
-                    url: "http://www.linkedin.com",
-                    imageUrl: "http://localhost:8000/www/img/2.jpg",
-                    headline: "Project Manager",
-                    event: "Changed job position",
-                    timestamp: moment().subtract('m', Math.random()*10).fromNow()
-                },
-                {
-                    name: "Adrian Burke",
-                    email: "adrian.burke23@gmail.com",
-                    url: "http://www.linkedin.com",
-                    imageUrl: "http://localhost:8000/www/img/a.jpg",
-                    headline: "Professor of Mathematics",
-                    event: "Updated prior education",
                     timestamp: moment().subtract('m', Math.random()*10).fromNow()
                 }
             ];
@@ -80,7 +35,7 @@ angular.module("app", ["services", "ui.route"])
     .directive("streamItem", function() {
         return {
             restrict: "A",
-            templateUrl: "tmplts/streamItem.tmplt.html",
+            templateUrl: "/static/tmplts/streamItem.tmplt.html",
             scope : {
                 people: "=",
                 person: "="
@@ -95,7 +50,7 @@ angular.module("app", ["services", "ui.route"])
     .directive("olarkChat", function () {
         return {
             restrict: "A",
-            templateUrl: "tmplts/olark.tmplt.html",
+            templateUrl: "/static/tmplts/olark.tmplt.html",
             link:function() {
                 window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https:"?"https:":"http:",z=c.name,r="load";var nt=function(){
                     f[z]=function(){
