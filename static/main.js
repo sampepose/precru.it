@@ -31,20 +31,6 @@ angular.module("app", ["services", "ui.route"])
                     timestamp: moment().subtract('m', Math.random()*10).fromNow()
                 }
             ];
-
-        $scope.add = function() {
-            $scope.people.push(
-                {
-                    name: "John Doe",
-                    email: "blah@gmail.com",
-                    url: "",
-                    imageUrl: "http://www.atmnhs.host22.com/Pictures/silhouette-woman.png",
-                    headline: "Developer",
-                    event: "Updated ____",
-                    timestamp: moment().subtract('m', Math.random()*10).fromNow()
-                }
-            );
-        };
     }])
     .directive("streamItem", function() {
         return {
