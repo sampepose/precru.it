@@ -9,9 +9,9 @@
             <div class="di" ng-click="removePerson()">
                 <button class="pull-right btn dropdown-toggle"><i class="icon-remove fr"></i></button>
             </div>
-            <span ng-bind="person.email"></span>
+            <span class="email" ng-bind="person.email"></span>
             <br>
-            <strong class="fl" ng-bind="person.event"></strong>
+            <div class="fl"><span class="attn">&raquo; </span><strong ng-bind="person.event"></strong></div>
 			<ul class="nav nav-list">						
 				<li class="divider"></li>
 				<li class="nav-header"><span class="fr" ng-bind="person.timestamp"></span></li>
