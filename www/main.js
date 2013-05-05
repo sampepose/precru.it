@@ -22,38 +22,60 @@ angular.module("app", ["services", "ui.route"])
         $scope.people =
             [
                 {
-                    name: "Jesse Gray",
-                    email: "jesse@gmail.com",
-                    url: "http://www.linkedin.com/in/jessegray/",
-                    imageUrl: "http://www.atmnhs.host22.com/Pictures/silhouette-woman.png",
-                    headline: "UX Guru",
+                    name: "Hana Drake",
+                    email: "hana.drake@gmail.com",
+                    url: "http://www.linkedin.com",
+                    imageUrl: "http://localhost:8000/www/img/h.jpg",
+                    headline: "Chief Executive Officer",
+                    event: "Updated Recommendations",
+                    timestamp: moment().subtract('m', Math.random()*10).fromNow()
+                },
+                {
+                    name: "Richard Jackson",
+                    email: "rjackson@gmail.com",
+                    url: "http://www.linkedin.com",
+                    imageUrl: "http://localhost:8000/www/img/r.jpg",
+                    headline: "Directory of Technology",
                     event: "Changed job position",
                     timestamp: moment().subtract('m', Math.random()*10).fromNow()
                 },
                 {
-                    name: "Sam Pepose",
-                    email: "sam@gmail.com",
-                    url: "http://www.linkedin.com/pub/samuel-pepose/56/816/59b",
-                    imageUrl: "http://www.atmnhs.host22.com/Pictures/silhouette-woman.png",
-                    headline: "Developer",
-                    event: "Updated Recommendations",
+                    name: "Ethan Fender",
+                    email: "ethanfender@hotmail.com",
+                    url: "http://www.linkedin.com",
+                    imageUrl: "http://localhost:8000/www/img/e.jpg",
+                    headline: "Sales Manager",
+                    event: "Changed prior education",
+                    timestamp: moment().subtract('m', Math.random()*10).fromNow()
+                },
+                {
+                    name: "Maryn Lopez",
+                    email: "mlopez@yahoo.org",
+                    url: "http://www.linkedin.com",
+                    imageUrl: "http://localhost:8000/www/img/m.jpg",
+                    headline: "Senior Developer",
+                    event: "Updated job experience",
+                    timestamp: moment().subtract('m', Math.random()*10).fromNow()
+                },
+                {
+                    name: "Kyle McNeil",
+                    email: "kmcneil@aol.com",
+                    url: "http://www.linkedin.com",
+                    imageUrl: "http://localhost:8000/www/img/2.jpg",
+                    headline: "Project Manager",
+                    event: "Changed job position",
+                    timestamp: moment().subtract('m', Math.random()*10).fromNow()
+                },
+                {
+                    name: "Adrian Burke",
+                    email: "adrian.burke23@gmail.com",
+                    url: "http://www.linkedin.com",
+                    imageUrl: "http://localhost:8000/www/img/a.jpg",
+                    headline: "Professor of Mathematics",
+                    event: "Updated prior education",
                     timestamp: moment().subtract('m', Math.random()*10).fromNow()
                 }
             ];
-
-        $scope.add = function() {
-            $scope.people.push(
-                {
-                    name: "John Doe",
-                    email: "blah@gmail.com",
-                    url: "",
-                    imageUrl: "http://www.atmnhs.host22.com/Pictures/silhouette-woman.png",
-                    headline: "Developer",
-                    event: "Updated ____",
-                    timestamp: moment().subtract('m', Math.random()*10).fromNow()
-                }
-            );
-        };
     }])
     .directive("streamItem", function() {
         return {

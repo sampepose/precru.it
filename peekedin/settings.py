@@ -4,7 +4,6 @@ import dj_database_url
 import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-print(BASE_DIR)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -36,7 +35,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -137,7 +136,10 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'south',
     'social_auth',
+    'rest_framework',
     'dashboard',
+    'core',
+    'leads',
 )
 
 # A sample logging configuration. The only tangible logging
