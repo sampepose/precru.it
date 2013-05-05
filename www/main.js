@@ -8,7 +8,8 @@ angular.module("app", ["services", "ui.route"])
             .when("/home", {templateUrl: "tmplts/home.tmplt.html"})
             .when("/dash", {templateUrl: "tmplts/dash.tmplt.html", controller: "DashCtrl"})
             .when("/confirmRegistration", {templateUrl: "tmplts/confirmRegistration.tmplt.html"})
-            .when("/addLeads", {templateUrl: "tmplts/addLeads.tmplt.html"});
+            .when("/myAccount", {templateUrl: "tmplts/myAccount.tmplt.html"})
+			.when("/addLeads", {templateUrl: "tmplts/addLeads.tmplt.html"});
     }])
     .controller("HeaderCtrl", ["$scope", "$location", "authService", function($scope, $location, authService){
         $scope.$on("$routeChangeStart", function(next, current) {
