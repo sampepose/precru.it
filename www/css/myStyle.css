@@ -94,3 +94,12 @@ div.ng-view {
         height: 10em;
     }
 }
+
+/**** CSS overrides and additions - JG ****/
+.hero-unit {padding:25px}
+.attn {color:#ffae00; font-weight:bold; font-size:22px; display:inline !important;}
+.email {color:#888; font-size:12px;}
+
+@media (max-width: 767px) {
+.hero-unit {padding:15px}
+}
