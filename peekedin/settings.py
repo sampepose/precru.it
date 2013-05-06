@@ -3,6 +3,8 @@
 import dj_database_url
 import os
 
+print("Running peekedin/settings")
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 DEBUG = True
@@ -16,18 +18,19 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'd2kcbm4o5gjg1d',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'USER': 'tjntohrdpwuzct',
+        'PASSWORD': 'c2SpK9flZWvNFMo7l5D73rymjw',
+        'HOST': 'ec2-54-235-155-40.compute-1.amazonaws.com',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '5432',                      # Set to empty string for default.
     }
 }
 
 # DB provided by Heroku <3
-DATABASES['default'] = dj_database_url.config(default='postgres://peekedin:password@localhost:5432/peekedin')
+# DATABASES['default'] = dj_database_url.config(default='postgres://peekedin:password@localhost:5432/peekedin')
+# DATABASES['default'] =  dj_database_url.config()
 
 # From Heroku getting started guide. Not sure? Sounds important.
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
