@@ -45,8 +45,8 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
             .success(function (data) {
                 $scope.leads = data.results;
                 for (var i = 0; i < $scope.leads.length; i++) {
-                    if (!$scope.leads[i].url) {
-                        $scope.leads[i].url = "../static/img/icon_no_photo.png";
+                    if (!$scope.leads[i].image_url) {
+                        $scope.leads[i].image_url = "../static/img/icon_no_photo.png";
                     }
                 }
             })
@@ -59,8 +59,8 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
                 .success(function (data) {
                     $scope.leads = data.results;
                     for (var i = 0; i < $scope.leads.length; i++) {
-                        if (!$scope.leads[i].url) {
-                            $scope.leads[i].url = "../static/img/icon_no_photo.png";
+                        if (!$scope.leads[i].image_url) {
+                            $scope.leads[i].image_url = "../static/img/icon_no_photo.png";
                         }
                     }
                 })
