@@ -48,6 +48,9 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
                     if (!$scope.leads[i].image_url) {
                         $scope.leads[i].image_url = "../static/img/icon_no_photo.png";
                     }
+                    for (var j = 0; j < $scope.leads[i].events.length; j++) {
+                        $scope.leads[i].events[j].event_datetime = moment($scope.leads[i].events[j].event_datetime).fromNow();
+                    }
                 }
             })
             .error(function (data, status) {
@@ -61,6 +64,9 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
                     for (var i = 0; i < $scope.leads.length; i++) {
                         if (!$scope.leads[i].image_url) {
                             $scope.leads[i].image_url = "../static/img/icon_no_photo.png";
+                        }
+                        for (var j = 0; j < $scope.leads[i].events.length; j++) {
+                            $scope.leads[i].events[j].event_datetime = moment($scope.leads[i].events[j].event_datetime).fromNow();
                         }
                     }
                 })
