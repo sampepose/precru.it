@@ -13,7 +13,7 @@
             <br>
             <div>
                 <span class="attn">&raquo; </span><strong ng-bind="lead.events[0].event_type"></strong>
-                <span class="fr timestamp" ng-bind="lead.events[0].event_datetime"></span>
+                <span class="fr timestamp" ng-bind="{{moment(lead.events[0].event_datetime).fromNow()}}"></span>
             </div>
             <div collapse="areEventsCollapsed" ng-repeat="event in lead.events.slice(1, lead.events.length)">
                 <span class="attn">&raquo; </span><strong ng-bind="event.event_type"></strong>
