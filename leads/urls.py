@@ -6,6 +6,12 @@ urlpatterns = patterns('leads.api',
         LeadListView.as_view(), 
         name='lead-list-view'),
 
+    url(r'^refresh/$',
+        LeadListView.as_view(), 
+        name='lead-list-view',
+        kwargs={'refresh': True}),
+        
+
     url(r'^(?P<pk>[0-9]+)/$', 
         LeadDetailView.as_view(), 
         name='lead-detail-view'),
