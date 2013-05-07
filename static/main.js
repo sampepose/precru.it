@@ -50,6 +50,11 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
             .success(function (data) {
                 $scope.leads = data.results;
                 $scope.emptyMessage = "You are not following anyone!";
+                for (var i = 0; i < $scope.leads.length; i++) {
+                    for (var j = 0; j < $scope.leads[i].events.length; j++) {
+                    //    $scope.leads[i].events[j].event_datetime = moment($scope.leads[i].events[j].event_datetime).fromNow();
+                    }
+                }
             })
             .error(function (data, status) {
                 //TODO: Error handling...
@@ -59,6 +64,11 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
             $http.get("/api/leads/refresh/")
                 .success(function (data) {
                     $scope.leads = data.results;
+                    for (var i = 0; i < $scope.leads.length; i++) {
+                        for (var j = 0; j < $scope.leads[i].events.length; j++) {
+                         //   $scope.leads[i].events[j].event_datetime = moment($scope.leads[i].events[j].event_datetime).fromNow();
+                        }
+                    }
                 })
                 .error(function (data, status) {
                     //TODO: Error handling...
@@ -97,7 +107,6 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
                     console.log(100);
                     $http.delete("/api/leads/" + $scope.lead.id)
                         .success(function (data) {
-                            console.log(1)
                             $scope.leads.splice($scope.leads.indexOf($scope.lead), 1);
                         })
                         .error(function (data, status) {
@@ -261,4 +270,9 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
                 return;
             $scope.username = n;
         })
+    })
+    .filter('timeSince', function(){
+        return function(val){
+            return moment(val).fromNow();
+        };
     });
