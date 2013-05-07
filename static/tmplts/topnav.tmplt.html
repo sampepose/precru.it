@@ -5,7 +5,7 @@
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-th-list"></span>
             </a>
-            <a class="brand" href="#/home"><img src="../../static/img/precruit-nav.png" height="40" alt="Precru.it" /></a>
+            <a class="brand" href="#/"><img src="../../static/img/precruit-nav.png" height="40" alt="Precru.it" /></a>
             <div class="nav-collapse collapse">
                 <ul class="nav pull-left">
                     <li><a href="#/dash" ui-route="/home" ng-hide="$uiRoute"><i class="icon-user" ></i> Stream</a></li>
@@ -25,14 +25,14 @@
 
 					<!-- Login Modal -->
                     <div class="btn-group">
-                        <div ng-controller="LoginModalCtrl" class="di">
+                        <div ng-controller="LoginModalCtrl" class="di" ng-hide="loggedIn">
                             <a href="" ng-click="open()" class="btn" ui-route="/home" ng-show="$uiRoute">Login</a>
                             <div login-modal class="di"></div>
                         </div>
                         <!-- End Login Modal -->
 
                         <!-- Register Modal -->
-                        <div ng-controller="RegisterModalCtrl" class="di">
+                        <div ng-controller="RegisterModalCtrl" class="di" ng-hide="loggedIn">
                             <a href="" ng-click="open()" class="btn" ui-route="/home" ng-show="$uiRoute">Register</a>
                             <div register-modal class="di"></div>
                         </div>

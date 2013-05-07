@@ -1,13 +1,13 @@
 <div class="well streamItem">
     <div class="row-fluid">
         <div class="di fl profileImageContainer span2">
-            <img class="profileImage" ng-src="{{lead.image_url}}"/>
+            <img class="profileImage" ng-src="{{lead.image_url != '' && lead.image_url || defaultImgUrl}}"/>
         </div>
         <div class="span10">
             <h3 class="leadName di"><a ng-href="{{lead.url}}" ng-bind="lead.name" target="_blank"></a>,</h3>
             <span class="leadHeadline" ng-bind="lead.headline"></span>
-            <div class="di" ng-click="removeLead()">
-                <button class="pull-right btn dropdown-toggle"><i class="icon-remove fr"></i></button>
+            <div class="di">
+                <button class="pull-right btn dropdown-toggle" ng-click="removeLead()"><i class="icon-remove fr"></i></button>
             </div>
             <span class="email" ng-bind="lead.email"></span>
             <br>

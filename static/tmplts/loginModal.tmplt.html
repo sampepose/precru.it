@@ -4,6 +4,7 @@
         <h3>Login to Precru.it</h3>
     </div>
     <div class="modal-body">
+        <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
         <form class="form-horizontal">
             <div class="control-group">
                 <label class="control-label" for="inputEmail">Username</label>

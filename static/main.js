@@ -32,23 +32,24 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
                     });
             };
 
-            $scope.$watch(function(){return authService.username}, function(n,o) {
+            $scope.$watch(function(){return authService}, function(n,o) {
                 if (n == o)
                     return;
-                $scope.username = n;
-            })
+                $scope.username = n.username;
+                $scope.loggedIn = n.loggedIn;
+                if (n.loggedIn) {
+                    $location.path("/dash");
+                }
+            }, true)
         }])
     .controller("DashCtrl", ["$scope", "$http", function ($scope, $http) {
         $scope.leads = [];
+        $scope.emptyMessage = "Loading your leads...";
 
         $http.get("/api/leads/")
             .success(function (data) {
                 $scope.leads = data.results;
-                for (var i = 0; i < $scope.leads.length; i++) {
-                    if (!$scope.leads[i].image_url) {
-                        $scope.leads[i].image_url = "../static/img/icon_no_photo.png";
-                    }
-                }
+                $scope.emptyMessage = "You are not following anyone!";
             })
             .error(function (data, status) {
                 //TODO: Error handling...
@@ -58,11 +59,6 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
             $http.get("/api/leads/refresh/")
                 .success(function (data) {
                     $scope.leads = data.results;
-                    for (var i = 0; i < $scope.leads.length; i++) {
-                        if (!$scope.leads[i].image_url) {
-                            $scope.leads[i].image_url = "../static/img/icon_no_photo.png";
-                        }
-                    }
                 })
                 .error(function (data, status) {
                     //TODO: Error handling...
@@ -80,7 +76,7 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
                     //TODO: Show success
                     $scope.lead.url = "";
                 })
-                .error(function (data, status) {
+                .error(function (data, status) {//Woops! You provided an incorrect username and password combination.
                     //TODO: Error handling...
                 });
         };
@@ -96,12 +92,16 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
             },
             controller: function($scope) {
                 $scope.areEventsCollapsed = true;
+                $scope.defaultImgUrl = "../static/img/icon_no_photo.png";
                 $scope.removeLead = function() {
+                    console.log(100);
                     $http.delete("/api/leads/" + $scope.lead.id)
                         .success(function (data) {
+                            console.log(1)
                             $scope.leads.splice($scope.leads.indexOf($scope.lead), 1);
                         })
                         .error(function (data, status) {
+                            console.log(2);
                             //TODO: Error handling...
                         });
                 };
@@ -158,6 +158,14 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
             password: ""
         };
 
+        $scope.addAlert = function () {
+            $scope.alerts.push({msg: "Another alert!"});
+        };
+
+        $scope.closeAlert = function (index) {
+            $scope.alerts.splice(index, 1);
+        };
+
         $scope.open = function () {
             $scope.shouldBeOpen = true;
         };
@@ -169,12 +177,17 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
         $scope.login = function () {
             $http.post("/api/login/", {username: $scope.auth.username, password: $scope.auth.password})
                 .success(function (data) {
+                    $scope.alerts = [
+                        { type: 'success', msg: 'Successful login!' }
+                    ];
                     authService.username = data.username;
                     authService.loggedIn = true;
                     $location.path("/dash");
                 })
                 .error(function (data, status) {
-                    //TODO: Error handling...
+                    $scope.alerts = [
+                        { type: 'error', msg: 'Oh snap! Change a few things up and try submitting again.' }
+                    ];
                 })
         };
 

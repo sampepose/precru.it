@@ -40,11 +40,13 @@ angular.module("services", [])
                             if (!authService.username) {
                                 authService.username = data.username;
                             }
+                            authService.loggedIn = true;
                             $timeout(timeout, 30000);
                         })
                         .error(function (data, status) {
                             if (status === 401 || status === 403)  {
                                 // Forbidden: No access
+                                authService.loggedIn = false;
                                 $location.path("/home");
                             }
                         })
