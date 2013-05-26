@@ -18,18 +18,18 @@
             <div class="control-group">
                 <label class="control-label" for="inputEmail">Username</label>
                 <div class="controls">
-                    <input type="text" id="inputEmail" placeholder="Username" ng-model="auth.username">
+                    <input type="text" id="inputEmail" placeholder="Username" ng-model="auth.username" required>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="inputPassword">Password</label>
                 <div class="controls">
-                    <input type="password" id="inputPassword" placeholder="Password" ng-model="auth.password">
+                    <input type="password" id="inputPassword" placeholder="Password" ng-model="auth.password" required>
                 </div>
             </div>
         </form>
     </div>
     <div class="modal-footer">
-        <a href="" ng-click="login()" role="button"class="btn btn-primary" data-toggle="modal"  data-dismiss="modal" aria-hidden="true">Login</a>
+        <a href="" ng-click="login()" role="button"class="btn btn-primary" data-toggle="modal"  data-dismiss="modal" aria-hidden="true" >Login</a>
     </div>
 </div>

@@ -174,6 +174,13 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap", "authentication",
         };
 
         $scope.login = function () {
+            if (!$scope.auth.username || !$scope.auth.password || $scope.auth.username == "" || $scope.auth.password == "") {
+                $scope.alerts = [
+                    { type: 'error', msg: "Please enter your username and password." }
+                ];
+                return;
+            }
+
             $http.post("/api/login/", {username: $scope.auth.username, password: $scope.auth.password})
                 .success(function (data) {
                     $scope.clear();
@@ -224,6 +231,16 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap", "authentication",
         $scope.register = function () {
             var data = $.extend({}, $scope.user);
             delete data.confirmPassword;
+
+            for (var prop in $scope.user) {
+                var val = $scope.user[prop];
+                if (!val || val == "") {
+                    $scope.alerts = [
+                        { type: 'error', msg: "Please fill out every field." }
+                    ];
+                    return;
+                }
+            }
 
             $scope.addAlert = function () {
                 $scope.alerts.push({msg: "Another alert!"});
