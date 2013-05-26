@@ -5,7 +5,7 @@
 			<h4>Add Lead</h4>
 			<p>Add a profile link of a lead you would like to track:</p>
 			<div class="container">
-				<input type="text" class="span5" ng-model="lead.url"/>
+				<input type="text" class="span5" ng-model="lead.url" ui-keyup="{'enter': 'addLead()'}"/>
 			</div>
             <a href="#/dash" class="btn btn-primary fr" ng-click="addLead()">Add Lead</a>
 		</div>

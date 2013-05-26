@@ -14,7 +14,7 @@
         <!-- End Error Alerts-->
 
         <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
-        <form class="form-horizontal">
+        <form class="form-horizontal" ui-keyup="{'enter': 'login()'}">
             <div class="control-group">
                 <label class="control-label" for="inputEmail">Username</label>
                 <div class="controls">

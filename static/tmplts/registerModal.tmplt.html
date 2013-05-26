@@ -14,7 +14,7 @@
         <!-- End Error Alerts-->
 
         <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
-        <form class="form-horizontal">
+        <form class="form-horizontal" ui-keyup="{'enter': 'register()'}" >
             <div class="control-group">
                 <label class="control-label" for="login-modal-f-name">First Name</label>
                 <div class="controls">

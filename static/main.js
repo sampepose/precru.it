@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module("app", ["services", "ui.route", "ui.bootstrap", "authentication"])
+angular.module("app", ["services", "ui.route", "ui.bootstrap", "authentication", "ui.keypress"])
     .config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
       //  $locationProvider.html5Mode(true);
         $routeProvider
