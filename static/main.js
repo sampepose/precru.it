@@ -162,10 +162,14 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
         }
     })
     .controller("LoginModalCtrl", function($scope, $http, $location, authService) {
-        $scope.auth = {
-            username: "",
-            password: ""
+        $scope.clear = function () {
+            $scope.auth = {
+                username: "",
+                password: ""
+            };
         };
+
+        $scope.clear();
 
         $scope.addAlert = function () {
             $scope.alerts.push({msg: "Another alert!"});
@@ -186,6 +190,7 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
         $scope.login = function () {
             $http.post("/api/login/", {username: $scope.auth.username, password: $scope.auth.password})
                 .success(function (data) {
+                    $scope.clear();
                     $scope.alerts = [
                         { type: 'success', msg: 'Successful login!' }
                     ];
@@ -206,15 +211,18 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
         };
     })
     .controller("RegisterModalCtrl", function($scope, $http, $location, $rootScope) {
-        $scope.user = {
-            first_name: "",
-            last_name: "",
-            username: "",
-            email: "",
-            password: "",
-            confirmPassword:""
-
+        $scope.clear = function() {
+            $scope.user = {
+                first_name: "",
+                last_name: "",
+                username: "",
+                email: "",
+                password: "",
+                confirmPassword:""
+            };
         };
+
+        $scope.clear();
 
         $scope.open = function () {
             $scope.shouldBeOpen = true;
@@ -230,6 +238,7 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
 
             $http.post("/api/register/", data)
                 .success(function (data) {
+                    $scope.clear();
                     $scope.shouldBeOpen = false;
                     $location.path("/addLead");
                   //TODO: Add later  $rootScope.$broadcast("showPayModal", {message: "Thank you for registering"});
