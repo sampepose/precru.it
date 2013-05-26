@@ -4,6 +4,15 @@
         <h3>Login to Precru.it</h3>
     </div>
     <div class="modal-body">
+
+        <!-- Error Alerts-->
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div error-alerts></div>
+            </div>
+        </div>
+        <!-- End Error Alerts-->
+
         <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
         <form class="form-horizontal">
             <div class="control-group">

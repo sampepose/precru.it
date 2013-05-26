@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module("app", ["services", "ui.route", "ui.bootstrap"])
+angular.module("app", ["services", "ui.route", "ui.bootstrap", "authentication"])
     .config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
       //  $locationProvider.html5Mode(true);
         $routeProvider
@@ -26,9 +26,6 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
                     .success(function (data) {
                         $location.path("/home");
                         authService.loggedIn = false;
-                    })
-                    .error(function (data, status) {
-                        //TODO: Error handling...
                     });
             };
 
@@ -42,12 +39,14 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
                 }
             }, true)
         }])
-    .controller("DashCtrl", ["$scope", "$http", function ($scope, $http) {
+    .controller("DashCtrl", ["$scope", "$http", "pingService", function ($scope, $http, pingService) {
         $scope.leads = [];
         $scope.emptyMessage = "Loading your leads...";
+        pingService.showOverlay = true;
 
         $http.get("/api/leads/")
             .success(function (data) {
+                pingService.showOverlay = false;
                 $scope.leads = data.results;
                 $scope.emptyMessage = "You are not following anyone!";
                 for (var i = 0; i < $scope.leads.length; i++) {
@@ -55,9 +54,6 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
                     //    $scope.leads[i].events[j].event_datetime = moment($scope.leads[i].events[j].event_datetime).fromNow();
                     }
                 }
-            })
-            .error(function (data, status) {
-                //TODO: Error handling...
             });
 
         $scope.refresh = function() {
@@ -69,9 +65,6 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
                          //   $scope.leads[i].events[j].event_datetime = moment($scope.leads[i].events[j].event_datetime).fromNow();
                         }
                     }
-                })
-                .error(function (data, status) {
-                    //TODO: Error handling...
                 });
         };
     }])
@@ -85,9 +78,6 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
                 .success(function (data) {
                     //TODO: Show success
                     $scope.lead.url = "";
-                })
-                .error(function (data, status) {//Woops! You provided an incorrect username and password combination.
-                    //TODO: Error handling...
                 });
         };
 
@@ -108,10 +98,6 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
                     $http.delete("/api/leads/" + $scope.lead.id)
                         .success(function (data) {
                             $scope.leads.splice($scope.leads.indexOf($scope.lead), 1);
-                        })
-                        .error(function (data, status) {
-                            console.log(2);
-                            //TODO: Error handling...
                         });
                 };
             }
@@ -161,7 +147,7 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
             templateUrl: "/static/tmplts/paymentModal.tmplt.html"
         }
     })
-    .controller("LoginModalCtrl", function($scope, $http, $location, authService) {
+    .controller("LoginModalCtrl", function($scope, $http, $location, authService, pingService) {
         $scope.clear = function () {
             $scope.auth = {
                 username: "",
@@ -194,15 +180,18 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
                     $scope.alerts = [
                         { type: 'success', msg: 'Successful login!' }
                     ];
+                    pingService.showOverlay = false;
                     authService.username = data.username;
                     authService.loggedIn = true;
                     $location.path("/dash");
                 })
                 .error(function (data, status) {
-                    $scope.alerts = [
-                        { type: 'error', msg: 'Oh snap! Change a few things up and try submitting again.' }
-                    ];
-                })
+                    if (status == 403) {
+                        $scope.alerts = [
+                            { type: 'error', msg: data.detail }
+                        ];
+                    }
+                });
         };
 
         $scope.opts = {
@@ -236,16 +225,31 @@ angular.module("app", ["services", "ui.route", "ui.bootstrap"])
             var data = $.extend({}, $scope.user);
             delete data.confirmPassword;
 
+            $scope.addAlert = function () {
+                $scope.alerts.push({msg: "Another alert!"});
+            };
+
+            $scope.closeAlert = function (index) {
+                $scope.alerts.splice(index, 1);
+            };
+
             $http.post("/api/register/", data)
                 .success(function (data) {
                     $scope.clear();
+                    $scope.alerts = [
+                        { type: 'success', msg: 'Successful login!' }
+                    ];
                     $scope.shouldBeOpen = false;
                     $location.path("/addLead");
                   //TODO: Add later  $rootScope.$broadcast("showPayModal", {message: "Thank you for registering"});
                 })
                 .error(function (data, status) {
-                    //TODO: Error handling...
-                })
+                    if (status == 403) {
+                        $scope.alerts = [
+                            { type: 'error', msg: data.detail }
+                        ];
+                    }
+                });
         };
 
         $scope.opts = {

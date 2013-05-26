@@ -1,0 +1,10 @@
+<div af-alert ng-repeat="alert in queue" type="alert.type" close="removeAlert($index)">
+    <div class="alert-details">
+        <div pr-accordion>
+            <div pr-accordion-group heading="{{alert.title}}">
+                <p ng-repeat="msg in alert.msgs"><strong ng-bind="msg.label"></strong><span ng-bind="msg.data"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -26,34 +26,4 @@ angular.module("services", [])
             }
         }];
         $httpProvider.responseInterceptors.push(interceptor);
-    }])
-    .factory('pingService', ['$http', '$timeout', "$location", "authService", function ($http, $timeout, $location, authService) {
-        return {
-            didInit: false,
-            init: function () {
-                if (this.didInit)
-                    return;
-
-                function timeout() {
-                    $http.get("/api/ping/")
-                        .success(function (data) {
-                            if (!authService.username) {
-                                authService.username = data.username;
-                            }
-                            authService.loggedIn = true;
-                            $timeout(timeout, 30000);
-                        })
-                        .error(function (data, status) {
-                            if (status === 401 || status === 403)  {
-                                // Forbidden: No access
-                                authService.loggedIn = false;
-                                $location.path("/home");
-                            }
-                        })
-                }
-                $timeout(timeout, 30000);
-                timeout();
-                this.didInit = true;
-            }
-        };
     }]);

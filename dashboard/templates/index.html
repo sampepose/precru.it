@@ -16,6 +16,13 @@
 
 <ng-include src="'../../static/tmplts/topnav.tmplt.html'" ng-controller="HeaderCtrl"></ng-include>
 
+<!-- Error Alerts-->
+<div class="container-fluid" style="margin-top: 60px;">
+    <div class="row-fluid">
+        <div error-alerts></div>
+    </div>
+</div>
+<!-- End Error Alerts-->
 <div ng-view class="ng-view"></div>
 <div olark-chat></div>
 
@@ -24,6 +31,10 @@
 <script src='/static/libs/bootstrap.min.js'></script>
 <script src='/static/libs/moment.min.js'></script>
 <script src="/static/libs/ui-bootstrap-tpls-0.3.0.min.js"></script>
+<script src='/static/accordion.js'></script>
+<script src='/static/alert.js'></script>
+<script src='/static/authentication.js'></script>
+<script src='/static/errorHandler.js'></script>
 <script src='/static/services.js'></script>
 <script src='/static/routes.js'></script>
 <script src='/static/main.js'></script>
